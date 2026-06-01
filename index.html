@@ -3,569 +3,519 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Habiba — Aerodynamics Researcher</title>
+<meta name="description" content="Habiba Morsy – PhD Student in Data Science at University of Virginia."/>
+<title>Habiba Morsy | PhD Student @ UVA</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;600;700;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Source+Sans+3:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --red:#c0141a;--red-dim:rgba(192,20,26,0.5);
-  --bg:#080808;--bg2:#0f0f0f;
-  --line:rgba(192,20,26,0.15);
-  --text:#e8e8e8;--muted:#555;
-  --mono:'Share Tech Mono',monospace;
-  --sans:'Barlow Condensed',sans-serif;
+  --red:#c41a1a;
+  --text:#111;
+  --muted:#666;
+  --light:#999;
+  --bg:#fff;
+  --serif:'Source Serif 4',Georgia,serif;
+  --sans:'Source Sans 3','Helvetica Neue',sans-serif;
 }
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:hidden}
-::-webkit-scrollbar{width:3px}
-::-webkit-scrollbar-thumb{background:var(--red-dim)}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:var(--sans);font-size:16px;line-height:1.6;
+  max-width:720px;margin:0 auto;padding:0 28px;
+}
+a{color:var(--red);text-decoration:none}
+a:hover{text-decoration:underline}
 
 /* ── HEADER ── */
-#site-header{
-  position:fixed;top:0;left:0;right:0;z-index:200;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:14px 32px;
-  border-bottom:1px solid var(--line);
-  background:rgba(8,8,8,0.9);
-  backdrop-filter:blur(16px);
+header{padding:52px 0 36px}
+h1{
+  font-family:var(--serif);font-size:2.4rem;font-weight:600;
+  letter-spacing:-.5px;margin-bottom:18px;
 }
-.h-name{font-size:17px;font-weight:700;letter-spacing:5px;text-transform:uppercase}
-.h-tag{font-family:var(--mono);font-size:9px;color:var(--red);letter-spacing:3px;text-transform:uppercase;margin-top:2px}
-.h-pip{display:inline-block;width:5px;height:5px;background:var(--red);border-radius:50%;margin-right:5px;animation:blink 1.8s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
-.h-nav{display:flex;gap:28px}
-.h-nav a{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
-.h-nav a:hover{color:var(--text)}
-
-/* ── HERO ── */
-#hero{position:relative;height:100vh;overflow:hidden}
-#canvas-wrap{position:absolute;inset:0;cursor:grab}
-#canvas-wrap:active{cursor:grabbing}
-#canvas-wrap canvas{width:100%!important;height:100%!important;display:block}
-.grid-bg{
-  position:absolute;inset:0;pointer-events:none;
-  background-image:linear-gradient(rgba(192,20,26,.03) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(192,20,26,.03) 1px,transparent 1px);
-  background-size:55px 55px;
-}
-.vignette{
-  position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(ellipse at 50% 50%,transparent 38%,rgba(8,8,8,.88) 100%);
-}
-/* corner marks */
-.cm{position:absolute;width:14px;height:14px;border-color:var(--red-dim);border-style:solid;z-index:10}
-.cm.tl{top:72px;left:16px;border-width:1px 0 0 1px}
-.cm.tr{top:72px;right:16px;border-width:1px 1px 0 0}
-.cm.bl{bottom:96px;left:16px;border-width:0 0 1px 1px}
-.cm.br{bottom:96px;right:16px;border-width:0 1px 1px 0}
-
-/* ── HOTSPOTS ── */
-.hs{
-  position:absolute;display:flex;align-items:center;gap:7px;
-  cursor:pointer;text-decoration:none;z-index:50;
-  transition:opacity .2s;
-}
-.hs:hover .hsdot{transform:scale(1.7);box-shadow:0 0 12px var(--red)}
-.hs:hover .hslabel{color:var(--text);border-color:var(--red)}
-.hsdot{
-  width:7px;height:7px;border-radius:50%;background:var(--red);flex-shrink:0;
-  box-shadow:0 0 6px var(--red-dim);transition:transform .2s,box-shadow .2s;
-}
-.hsline{width:24px;height:1px;background:var(--red-dim);flex-shrink:0}
-.hslabel{
-  font-family:var(--mono);font-size:9px;letter-spacing:3px;text-transform:uppercase;
-  color:var(--muted);border:1px solid rgba(192,20,26,.22);
-  padding:4px 9px;border-radius:2px;background:rgba(8,8,8,.75);
-  backdrop-filter:blur(4px);white-space:nowrap;transition:color .2s,border-color .2s;
-}
-/* positions — calibrated to car projected on screen from default camera angle */
-/* X runs nose(-1300) → tail(4160), car centre X=1430, Z centred on 0          */
-/* Default camera: theta≈0.2π, phi≈0.35π, radius≈7000 → roughly 3/4 front-left view */
-#hs-about    {top:44%;left:22%}   /* nose — front-left */
-#hs-projects {top:38%;left:46%}   /* cockpit — centre */
-#hs-news     {top:30%;left:60%}   /* engine cover — rear-centre */
-#hs-education{top:52%;left:52%}   /* roll hoop area */
-#hs-cv       {top:28%;left:72%}   /* rear wing — top-right */
-
-/* ── HERO BOTTOM BAR ── */
-.hero-bar{
-  position:absolute;bottom:0;left:0;right:0;z-index:30;
-  display:flex;align-items:flex-end;justify-content:space-between;
-  padding:18px 32px;
-  border-top:1px solid var(--line);
-  background:rgba(8,8,8,.55);backdrop-filter:blur(8px);
-}
-.hb-name{font-size:42px;font-weight:900;letter-spacing:8px;text-transform:uppercase;line-height:1}
-.hb-sub{font-family:var(--mono);font-size:9px;color:var(--red);letter-spacing:3px;text-transform:uppercase;margin-top:5px}
-.hb-hint{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;text-align:right;line-height:2}
-
-/* loading overlay */
-.loader{
-  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  z-index:60;font-family:var(--mono);font-size:10px;letter-spacing:3px;
-  color:var(--muted);text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:12px;
-}
-.lbar{width:160px;height:1px;background:rgba(192,20,26,.2);position:relative;overflow:hidden}
-.lbar::after{content:'';position:absolute;left:-60%;top:0;width:60%;height:100%;background:var(--red);animation:lsweep 1.2s infinite linear}
-@keyframes lsweep{to{left:110%}}
+nav{display:flex;gap:22px;flex-wrap:wrap;margin-bottom:0}
+nav a{font-size:15px;color:var(--muted);font-weight:400}
+nav a:hover{color:var(--red);text-decoration:none}
 
 /* ── SECTIONS ── */
-.section{min-height:100vh;padding:100px 0 80px;border-top:1px solid var(--line)}
-.section-inner{max-width:960px;margin:0 auto;padding:0 40px}
-.s-eye{
-  font-family:var(--mono);font-size:9px;letter-spacing:4px;color:var(--red);
-  text-transform:uppercase;margin-bottom:10px;
-  display:flex;align-items:center;gap:10px;
+section{padding:48px 0 0}
+h2{
+  font-family:var(--serif);font-size:1.5rem;font-weight:600;
+  margin-bottom:28px;
 }
-.s-eye::before{content:'';display:block;width:28px;height:1px;background:var(--red-dim)}
-.s-title{font-size:52px;font-weight:900;letter-spacing:4px;text-transform:uppercase;line-height:.95;margin-bottom:36px}
-.s-div{width:36px;height:2px;background:var(--red);margin-bottom:36px}
 
-/* card grid */
-.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:2px;overflow:hidden}
-.ccard{background:var(--bg2);padding:26px 22px;min-height:170px;display:flex;flex-direction:column;justify-content:space-between;transition:background .2s}
-.ccard:hover{background:#131313}
-.cc-tag{font-family:var(--mono);font-size:8px;letter-spacing:3px;color:var(--red);text-transform:uppercase}
-.cc-title{font-size:17px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--text);margin-top:10px}
-.cc-body{font-size:13px;font-weight:300;color:var(--muted);line-height:1.7;margin-top:6px}
-.cc-arr{font-family:var(--mono);font-size:10px;color:var(--red);letter-spacing:2px;margin-top:14px}
-
-/* about */
-.a-cols{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
-.a-bio{font-size:17px;font-weight:300;line-height:1.9;color:#aaa}
-.stat-list{display:flex;flex-direction:column;gap:0}
-.stat{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--line);padding:13px 0}
-.stat-l{font-family:var(--mono);font-size:9px;letter-spacing:2px;color:var(--muted);text-transform:uppercase}
-.stat-v{font-size:14px;font-weight:600;letter-spacing:1px;color:var(--text)}
-
-/* education timeline */
-.edu-item{border-bottom:1px solid var(--line);padding:22px 0;max-width:680px}
-.edu-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
-.edu-deg{font-size:19px;font-weight:600;letter-spacing:1px}
-.edu-yr{font-family:var(--mono);font-size:9px;letter-spacing:2px;color:var(--muted)}
-.edu-uni{font-size:14px;color:var(--red);letter-spacing:1px;margin-bottom:4px}
-.edu-desc{font-size:13px;color:var(--muted);font-weight:300;line-height:1.7}
-
-/* cv */
-.cv-btn{
-  font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;
-  color:var(--text);border:1px solid var(--red-dim);padding:11px 22px;
-  text-decoration:none;border-radius:2px;display:inline-block;margin-bottom:36px;
-  transition:border-color .2s;
+/* ── ABOUT ── */
+.about-grid{display:grid;grid-template-columns:1fr 148px;gap:40px;align-items:start;margin-bottom:20px}
+.about-bio{font-size:15.5px;line-height:1.8;color:#222}
+.about-bio p{margin-bottom:14px}
+.about-bio p:last-child{margin-bottom:0}
+.about-photo{
+  width:148px;height:148px;border-radius:4px;
+  background:#eee;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;color:var(--light);text-align:center;
 }
-.cv-btn:hover{border-color:var(--red)}
-.cv-section-head{font-family:var(--mono);font-size:9px;letter-spacing:4px;color:var(--red);text-transform:uppercase;padding:20px 0 8px}
-.cv-item{border-bottom:1px solid var(--line);padding:18px 0;max-width:680px}
-.cv-item-top{display:flex;justify-content:space-between;align-items:baseline}
-.cv-role{font-size:16px;font-weight:600;letter-spacing:1px}
-.cv-date{font-family:var(--mono);font-size:9px;letter-spacing:2px;color:var(--muted)}
-.cv-org{font-size:13px;color:var(--red);letter-spacing:1px;margin:3px 0}
-.cv-desc{font-size:13px;color:var(--muted);font-weight:300;line-height:1.7}
+.about-photo img{width:100%;height:100%;object-fit:cover}
+.keywords{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 20px}
+.kw{
+  font-size:13px;color:var(--muted);
+  border:1px solid #ddd;padding:3px 11px;border-radius:20px;
+}
+.social-links{display:flex;gap:18px;flex-wrap:wrap;margin-top:4px}
+.social-links a{font-size:14px;color:var(--muted)}
+.social-links a:hover{color:var(--red);text-decoration:none}
 
-/* footer */
-footer{border-top:1px solid var(--line);padding:28px 40px;display:flex;align-items:center;justify-content:space-between;max-width:960px;margin:0 auto}
-.f-mono{font-family:var(--mono);font-size:9px;letter-spacing:2px;color:var(--muted);text-transform:uppercase}
-.f-links{display:flex;gap:20px}
-.f-links a{font-family:var(--mono);font-size:9px;letter-spacing:2px;color:var(--muted);text-decoration:none;text-transform:uppercase;transition:color .2s}
-.f-links a:hover{color:var(--red)}
+/* ── PROJECTS ── */
+.project{margin-bottom:44px}
+.project-fig{
+  position:relative;overflow:hidden;
+  background:#f4f4f4;border-radius:4px;
+  margin-bottom:14px;
+  height:220px;
+  cursor:default;
+}
+/* The 3D car viewer lives here for the BoxCar project */
+.project-fig.viewer-fig{
+  height:280px;background:#0c0c0c;
+}
+.project-fig img{
+  width:100%;height:100%;object-fit:cover;
+  display:block;
+  transition:opacity .3s;
+}
+.fig-hover-img{
+  position:absolute;inset:0;
+  opacity:0;transition:opacity .3s;
+  display:flex;align-items:center;justify-content:center;
+  background:#f4f4f4;
+}
+.fig-hover-img img{width:100%;height:100%;object-fit:cover}
+.project-fig:hover .fig-hover-img{opacity:1}
+.hover-hint{
+  font-size:11px;color:var(--light);
+  margin-top:-10px;margin-bottom:14px;
+}
+.project h3{
+  font-family:var(--serif);font-size:1.08rem;font-weight:600;
+  margin-bottom:7px;line-height:1.4;
+}
+.project-desc{font-size:14.5px;color:#333;line-height:1.75;margin-bottom:10px}
+.project-links{display:flex;gap:14px;flex-wrap:wrap}
+.project-links a{font-size:14px;font-weight:500}
+
+/* car viewer */
+.car-wrap{position:absolute;inset:0;cursor:grab}
+.car-wrap:active{cursor:grabbing}
+.car-wrap canvas{width:100%!important;height:100%!important;display:block}
+.car-ui{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:8px 14px;
+  background:linear-gradient(transparent,rgba(0,0,0,.55));
+  display:flex;justify-content:space-between;
+  pointer-events:none;
+  font-size:11px;font-family:monospace;letter-spacing:1px;text-transform:uppercase;
+}
+.car-ui-left{color:rgba(255,255,255,.45)}
+.car-ui-right{color:rgba(255,255,255,.3)}
+.car-loader{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-size:11px;font-family:monospace;color:#444;letter-spacing:1px;
+  text-transform:uppercase;text-align:center;pointer-events:none;
+}
+
+/* ── NEWS ── */
+table.news{width:100%;border-collapse:collapse}
+table.news td{
+  padding:9px 0;vertical-align:top;
+  border-bottom:1px solid #f0f0f0;
+  font-size:14.5px;
+}
+table.news td:first-child{
+  width:140px;padding-right:20px;
+  color:var(--muted);white-space:nowrap;
+  font-size:13.5px;
+}
+.news-more-btn{
+  margin-top:12px;font-size:14px;color:var(--red);
+  cursor:pointer;background:none;border:none;padding:0;
+  font-family:var(--sans);
+}
+.news-more-btn:hover{text-decoration:underline;cursor:pointer}
+.news-extra{display:none}
+.news-extra.show{display:table-row-group}
+
+/* ── EDUCATION ── */
+.edu-entry{margin-bottom:28px}
+.edu-entry h3{
+  font-family:var(--serif);font-size:1.05rem;font-weight:600;
+  margin-bottom:2px;
+}
+.edu-entry .deg{font-size:15px;color:#222;margin-bottom:1px}
+.edu-entry .dates{font-size:13.5px;color:var(--muted)}
+.edu-entry .detail{font-size:13.5px;color:var(--muted);margin-top:3px;line-height:1.5}
+
+/* ── CV ── */
+.cv-download{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:15px;font-weight:500;
+  color:#fff;background:var(--red);
+  padding:10px 22px;border-radius:4px;
+  margin-top:4px;transition:opacity .15s;
+}
+.cv-download:hover{opacity:.85;text-decoration:none}
+
+/* ── FOOTER ── */
+footer{
+  padding:48px 0 36px;
+  font-size:13px;color:var(--muted);
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:540px){
+  .about-grid{grid-template-columns:1fr}
+  .about-photo{width:100px;height:100px}
+  h1{font-size:1.9rem}
+}
 </style>
 </head>
 <body>
 
-<header id="site-header">
-  <div>
-    <div class="h-name">Habiba</div>
-    <div class="h-tag"><span class="h-pip"></span>FIA 2026 · Aerodynamics</div>
-  </div>
-  <nav class="h-nav">
-    <a href="#s-about">About</a>
-    <a href="#s-projects">Projects</a>
-    <a href="#s-news">News</a>
-    <a href="#s-education">Education</a>
-    <a href="#s-cv">CV</a>
+<header>
+  <h1>Habiba Morsy</h1>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#news">News</a>
+    <a href="#education">Education</a>
+    <a href="CV.pdf">CV</a>
   </nav>
 </header>
 
-<!-- HERO -->
-<section id="hero">
-  <div class="grid-bg"></div>
-  <div class="vignette"></div>
-  <div class="cm tl"></div><div class="cm tr"></div>
-  <div class="cm bl"></div><div class="cm br"></div>
-
-  <div id="canvas-wrap">
-    <div id="loader" class="loader">
-      <div>Loading FIA 2026 Reference Car</div>
-      <div class="lbar"></div>
-    </div>
-  </div>
-
-  <!-- hotspots -->
-  <a class="hs" id="hs-about"     href="#s-about">
-    <div class="hsdot"></div><div class="hsline"></div><div class="hslabel">About</div>
-  </a>
-  <a class="hs" id="hs-projects"  href="#s-projects">
-    <div class="hsdot"></div><div class="hsline"></div><div class="hslabel">Projects</div>
-  </a>
-  <a class="hs" id="hs-news"      href="#s-news">
-    <div class="hsdot"></div><div class="hsline"></div><div class="hslabel">News</div>
-  </a>
-  <a class="hs" id="hs-education" href="#s-education">
-    <div class="hsdot"></div><div class="hsline"></div><div class="hslabel">Education</div>
-  </a>
-  <a class="hs" id="hs-cv"        href="#s-cv">
-    <div class="hsdot"></div><div class="hsline"></div><div class="hslabel">CV</div>
-  </a>
-
-  <div class="hero-bar">
-    <div>
-      <div class="hb-name">Habiba</div>
-      <div class="hb-sub">FIA 2026 F1 Reference Car · Aerodynamics Research</div>
-    </div>
-    <div class="hb-hint">drag to rotate<br>scroll to zoom<br>click label → section</div>
-  </div>
-</section>
-
 <!-- ABOUT -->
-<section class="section" id="s-about">
-  <div class="section-inner">
-    <div class="s-eye">01 · About</div>
-    <h2 class="s-title">About<br>Me</h2>
-    <div class="s-div"></div>
-    <div class="a-cols">
-      <div class="a-bio">
-        [ Your bio here — introduce yourself, your research focus, what drives your work in
-        Formula 1 aerodynamics, and any key affiliations or collaborations. ]
-      </div>
-      <div class="stat-list">
-        <div class="stat"><span class="stat-l">Affiliation</span><span class="stat-v">[ University / Team ]</span></div>
-        <div class="stat"><span class="stat-l">Focus</span><span class="stat-v">[ e.g. Ground Effect / CFD ]</span></div>
-        <div class="stat"><span class="stat-l">Location</span><span class="stat-v">[ City, Country ]</span></div>
-        <div class="stat"><span class="stat-l">Email</span><span class="stat-v" style="color:var(--red)">[ your@email.com ]</span></div>
-        <div class="stat"><span class="stat-l">GitHub</span><span class="stat-v">[ github.com/you ]</span></div>
-        <div class="stat"><span class="stat-l">LinkedIn</span><span class="stat-v">[ linkedin.com/in/you ]</span></div>
-      </div>
+<section id="about">
+  <div class="about-grid">
+    <div class="about-bio">
+      <p>Hi! I'm Habiba, a PhD student in Data Science at the <a href="https://datascience.virginia.edu" target="_blank">University of Virginia</a>.</p>
+      <p>My research is at the intersection of machine learning, large language models, and scientific discovery — from automating quality assurance of digital library metadata to foundation models for computational materials science.</p>
+      <p>Before UVA I completed a B.S. in Science and Technology (Applied Mathematics, CS minor) and an M.S. in Computational Science and Engineering at Kean University.</p>
     </div>
+    <div class="about-photo">
+      <!-- Replace with: <img src="photo.jpg" alt="Habiba Morsy"> -->
+      photo.jpg
+    </div>
+  </div>
+
+  <div class="keywords">
+    <span class="kw">Large Language Models</span>
+    <span class="kw">Machine Learning</span>
+    <span class="kw">Data Science</span>
+    <span class="kw">Computational Science</span>
+    <span class="kw">F1 · FIA 2026</span>
+  </div>
+
+  <div class="social-links">
+    <a href="https://linkedin.com/in/" target="_blank">LinkedIn</a>
+    <a href="https://github.com/" target="_blank">GitHub</a>
+    <a href="https://scholar.google.com/" target="_blank">Google Scholar</a>
+    <a href="mailto:crv4jj@virginia.edu">crv4jj@virginia.edu</a>
+    <a href="CV.pdf" target="_blank">CV</a>
   </div>
 </section>
 
 <!-- PROJECTS -->
-<section class="section" style="background:#090909" id="s-projects">
-  <div class="section-inner">
-    <div class="s-eye">02 · Projects</div>
-    <h2 class="s-title">Research<br>Projects</h2>
-    <div class="s-div"></div>
-    <div class="cgrid">
-      <div class="ccard">
-        <div>
-          <div class="cc-tag">2024 – present</div>
-          <div class="cc-title">[ Project Title 1 ]</div>
-          <div class="cc-body">[ Short description of the research, methods, and key outcomes. ]</div>
-        </div>
-        <div class="cc-arr">→ Read more</div>
-      </div>
-      <div class="ccard">
-        <div>
-          <div class="cc-tag">2023 – 2024</div>
-          <div class="cc-title">[ Project Title 2 ]</div>
-          <div class="cc-body">[ Short description. ]</div>
-        </div>
-        <div class="cc-arr">→ Read more</div>
-      </div>
-      <div class="ccard">
-        <div>
-          <div class="cc-tag">FIA 2026 Ref Car</div>
-          <div class="cc-title">FreeCAD Procedural Model</div>
-          <div class="cc-body">Procedural generation of the FIA 2026 F1 reference car geometry from regulatory documents using FreeCAD Python macros.</div>
-        </div>
-        <div class="cc-arr">→ GitHub</div>
-      </div>
-      <div class="ccard">
-        <div>
-          <div class="cc-tag">2022 – 2023</div>
-          <div class="cc-title">[ Project Title 4 ]</div>
-          <div class="cc-body">[ Short description. ]</div>
-        </div>
-        <div class="cc-arr">→ Read more</div>
-      </div>
+<section id="projects">
+  <h2>Projects &amp; Papers</h2>
+
+  <!-- PC-ED -->
+  <div class="project">
+    <div class="project-fig">
+      <div class="fig-hover-img"><img src="" alt="" onerror="this.style.display='none'"/></div>
+    </div>
+    <p class="hover-hint">↑ Hover to see figure</p>
+    <h3>PC-ED: Testing Automated Agents to Assess the Quality of Training Resource Metadata</h3>
+    <p class="project-desc">
+      We developed an automated agent system using LLMs and RAG to evaluate and improve the quality
+      of CCIHE training resource metadata, dynamically updating the database with new Q&amp;A pairs.
+      Integrated into a React dashboard for secure, enhanced user interaction.
+    </p>
+    <div class="project-links">
+      <a href="#">Read Paper →</a>
+      <span style="font-size:14px;color:var(--muted)">SC25 — International Conference for High Performance Computing</span>
     </div>
   </div>
+
+  <!-- RCSB -->
+  <div class="project">
+    <div class="project-fig">
+      <div class="fig-hover-img"><img src="" alt="" onerror="this.style.display='none'"/></div>
+    </div>
+    <p class="hover-hint">↑ Hover to see figure</p>
+    <h3>RCSB Protein Data Bank: Python Software Package for Accessing RCSB PDB APIs</h3>
+    <p class="project-desc">
+      A Python wrapper for RCSB PDB's data API enabling streamlined access and integration of
+      3D macromolecular structure data. Built with GraphQL, rustworkx, networkx, and Azure.
+      Published open-source on GitHub and PyPI.
+    </p>
+    <div class="project-links">
+      <a href="#">Read Paper →</a>
+      <a href="#">GitHub →</a>
+      <a href="#">PyPI →</a>
+      <span style="font-size:14px;color:var(--muted)">Journal of Molecular Biology</span>
+    </div>
+  </div>
+
+  <!-- Fraunhofer -->
+  <div class="project">
+    <div class="project-fig">
+      <div class="fig-hover-img"><img src="" alt="" onerror="this.style.display='none'"/></div>
+    </div>
+    <p class="hover-hint">↑ Hover to see figure</p>
+    <h3>Towards Foundation Models for Shock Compression of Solid Reactive Materials</h3>
+    <p class="project-desc">
+      Investigating the application of foundation models to shock compression of solid reactive
+      materials, bridging large-scale machine learning with computational materials science.
+    </p>
+    <div class="project-links">
+      <a href="#">Read Paper →</a>
+      <span style="font-size:14px;color:var(--muted)">2026 International Annual Conference of the Fraunhofer ICT</span>
+    </div>
+  </div>
+
+  <!-- FIA 2026 BoxCar — 3D viewer instead of static image -->
+  <div class="project">
+    <div class="project-fig viewer-fig" id="car-fig">
+      <div class="car-wrap" id="car-wrap">
+        <div class="car-loader" id="car-loader">Loading car…</div>
+      </div>
+      <div class="car-ui">
+        <span class="car-ui-left">FIA 2026 · Ref Car</span>
+        <span class="car-ui-right">drag · scroll</span>
+      </div>
+    </div>
+    <h3>FIA 2026 F1 Reference Car — Procedural Parametric Model</h3>
+    <p class="project-desc">
+      Full procedural reconstruction of the FIA 2026 Formula 1 reference car geometry generated
+      entirely from the technical regulations using a FreeCAD Python macro. Every volume —
+      floor, nose, chassis, sidepods, front and rear wings, halo, wheel drums, diffuser —
+      is built from first principles via CSG booleans and plane trims derived from regulatory dimensions.
+    </p>
+    <div class="project-links">
+      <a href="#">GitHub →</a>
+    </div>
+  </div>
+
+  <!-- VR -->
+  <div class="project">
+    <div class="project-fig">
+      <div class="fig-hover-img"><img src="" alt="" onerror="this.style.display='none'"/></div>
+    </div>
+    <p class="hover-hint">↑ Hover to see figure</p>
+    <h3>VR Interactive Data Exploration</h3>
+    <p class="project-desc">
+      Custom Unity applications for interactive data exploration in VR. Implemented complex
+      data interactions and user interfaces via Unity scripting; created and optimized
+      3D models in Blender and Maya.
+    </p>
+    <div class="project-links">
+      <span style="font-size:14px;color:var(--muted)">Undergraduate Research · Kean University, 2022–2023</span>
+    </div>
+  </div>
+
 </section>
 
 <!-- NEWS -->
-<section class="section" id="s-news">
-  <div class="section-inner">
-    <div class="s-eye">03 · News</div>
-    <h2 class="s-title">Latest<br>News</h2>
-    <div class="s-div"></div>
-    <div class="cgrid">
-      <div class="ccard">
-        <div>
-          <div class="cc-tag">Month Year</div>
-          <div class="cc-title">[ News item 1 ]</div>
-          <div class="cc-body">[ e.g. Paper accepted, award, new collaboration, talk. ]</div>
-        </div>
-      </div>
-      <div class="ccard">
-        <div>
-          <div class="cc-tag">Month Year</div>
-          <div class="cc-title">[ News item 2 ]</div>
-          <div class="cc-body">[ Brief description. ]</div>
-        </div>
-      </div>
-      <div class="ccard">
-        <div>
-          <div class="cc-tag">Month Year</div>
-          <div class="cc-title">[ News item 3 ]</div>
-          <div class="cc-body">[ Brief description. ]</div>
-        </div>
-      </div>
-    </div>
-  </div>
+<section id="news">
+  <h2>News</h2>
+  <table class="news">
+    <tbody>
+      <tr><td>2026</td><td>Poster at International Annual Conference of the Fraunhofer ICT.</td></tr>
+      <tr><td>2026</td><td>Paper accepted — <em>Towards Foundation Models for Shock Compression of Solid Reactive Materials</em>, Fraunhofer ICT.</td></tr>
+      <tr><td>Jun 2026 – Aug 2026</td><td>Graduate Teaching Assistant — <em>Machine Learning in Systems and Network Security</em> (Master's), UVA.</td></tr>
+      <tr><td>Jan 2026 – May 2026</td><td>Graduate Teaching Assistant — <em>Introduction to Deep Learning</em> (Undergraduate), UVA.</td></tr>
+      <tr><td>Aug 2025</td><td>Started PhD in Data Science at University of Virginia.</td></tr>
+      <tr><td>Sep 2025 – Dec 2025</td><td>Graduate Teaching Assistant — <em>Computational Probability</em> (Undergraduate), UVA.</td></tr>
+    </tbody>
+    <tbody class="news-extra" id="news-extra">
+      <tr><td>2025</td><td>Paper accepted — <em>PC-ED: Testing Automated Agents to Assess the Quality of Training Resource Metadata</em>, SC25.</td></tr>
+      <tr><td>2025</td><td>Completed M.S. Computational Science and Engineering, Kean University.</td></tr>
+      <tr><td>2024</td><td>Poster at ABRCMS Conference 2024.</td></tr>
+      <tr><td>2024</td><td>Poster at Rutgers RISE REU Symposium 2024.</td></tr>
+      <tr><td>May – Aug 2024</td><td>Software Developer Intern at RCSB Protein Data Bank. Published Python package on PyPI.</td></tr>
+      <tr><td>2024</td><td>Paper published — <em>RCSB Protein Data Bank: Python Software Package for Accessing RCSB PDB APIs</em>, Journal of Molecular Biology.</td></tr>
+      <tr><td>2023</td><td>Awarded Generation Google Scholar and National Cyber Scholarship Scholar.</td></tr>
+      <tr><td>2022 – 2024</td><td>Poster presentations at Research Days, Kean University.</td></tr>
+      <tr><td>2023</td><td>Distinction in Research Award, Kean University.</td></tr>
+    </tbody>
+  </table>
+  <button class="news-more-btn" id="news-btn" onclick="toggleNews()">Next →</button>
 </section>
 
 <!-- EDUCATION -->
-<section class="section" style="background:#090909" id="s-education">
-  <div class="section-inner">
-    <div class="s-eye">04 · Education</div>
-    <h2 class="s-title">Education</h2>
-    <div class="s-div"></div>
-    <div class="edu-item">
-      <div class="edu-top">
-        <div class="edu-deg">[ Degree, Field ]</div>
-        <div class="edu-yr">[ Year – Year ]</div>
-      </div>
-      <div class="edu-uni">[ University Name ]</div>
-      <div class="edu-desc">[ Thesis title or research focus. Supervisor. ]</div>
-    </div>
-    <div class="edu-item">
-      <div class="edu-top">
-        <div class="edu-deg">[ Degree, Field ]</div>
-        <div class="edu-yr">[ Year – Year ]</div>
-      </div>
-      <div class="edu-uni">[ University Name ]</div>
-      <div class="edu-desc">[ Specialisation or brief description. ]</div>
-    </div>
-    <div class="edu-item">
-      <div class="edu-top">
-        <div class="edu-deg">[ Degree, Field ]</div>
-        <div class="edu-yr">[ Year – Year ]</div>
-      </div>
-      <div class="edu-uni">[ University Name ]</div>
-    </div>
+<section id="education">
+  <h2>Education</h2>
+
+  <div class="edu-entry">
+    <h3>University of Virginia</h3>
+    <div class="deg">Doctor of Philosophy in Data Science</div>
+    <div class="dates">August 2025 – May 2030</div>
+  </div>
+
+  <div class="edu-entry">
+    <h3>Kean University</h3>
+    <div class="deg">M.S. Computational Science and Engineering</div>
+    <div class="dates">January 2025 – June 2025</div>
+    <div class="detail">Thesis: Developing Large Language Models to Automate Quality Assurance of Digital Library Metadata · transferred to UVA</div>
+  </div>
+
+  <div class="edu-entry">
+    <h3>Kean University</h3>
+    <div class="deg">B.S. Science and Technology — Applied Mathematics, Computer Science Minor</div>
+    <div class="dates">September 2021 – December 2025</div>
+    <div class="detail">Dean's List 2021–2025 · Vice President, ACM · Treasurer, ACM-W · Secretary, Arab Culture Club</div>
   </div>
 </section>
 
 <!-- CV -->
-<section class="section" id="s-cv">
-  <div class="section-inner">
-    <div class="s-eye">05 · CV</div>
-    <h2 class="s-title">Curriculum<br>Vitae</h2>
-    <div class="s-div"></div>
-    <a href="cv.pdf" class="cv-btn">↓ Download PDF</a>
-
-    <div class="cv-section-head">Experience</div>
-    <div class="cv-item">
-      <div class="cv-item-top">
-        <div class="cv-role">[ Role / Position ]</div>
-        <div class="cv-date">[ Year – Year ]</div>
-      </div>
-      <div class="cv-org">[ Organisation ]</div>
-      <div class="cv-desc">[ Brief description of responsibilities and outputs. ]</div>
-    </div>
-    <div class="cv-item">
-      <div class="cv-item-top">
-        <div class="cv-role">[ Role / Position ]</div>
-        <div class="cv-date">[ Year – Year ]</div>
-      </div>
-      <div class="cv-org">[ Organisation ]</div>
-      <div class="cv-desc">[ Brief description. ]</div>
-    </div>
-
-    <div class="cv-section-head">Publications</div>
-    <div class="cv-item">
-      <div class="cv-date">[ Year ]</div>
-      <div class="cv-role" style="margin-top:4px;font-size:15px">[ Paper Title ]</div>
-      <div class="cv-desc">[ Authors ] · [ Journal / Conference ]</div>
-    </div>
-    <div class="cv-item">
-      <div class="cv-date">[ Year ]</div>
-      <div class="cv-role" style="margin-top:4px;font-size:15px">[ Paper Title ]</div>
-      <div class="cv-desc">[ Authors ] · [ Journal / Conference ]</div>
-    </div>
-  </div>
+<section id="cv" style="padding-bottom:8px">
+  <h2>CV</h2>
+  <a href="CV.pdf" class="cv-download" target="_blank">↓ Download CV</a>
 </section>
 
 <footer>
-  <div class="f-mono">© 2026 Habiba</div>
-  <div class="f-links">
-    <a href="mailto:your@email.com">Email</a>
-    <a href="#" target="_blank">GitHub</a>
-    <a href="#" target="_blank">LinkedIn</a>
-  </div>
+  © 2026 Habiba Morsy · <a href="mailto:crv4jj@virginia.edu">crv4jj@virginia.edu</a>
 </footer>
 
 <!-- THREE.JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-(function(){
-  const wrap = document.getElementById('canvas-wrap');
-  const loaderEl = document.getElementById('loader');
+// News toggle
+function toggleNews() {
+  const extra = document.getElementById('news-extra');
+  const btn   = document.getElementById('news-btn');
+  const open  = extra.classList.toggle('show');
+  btn.textContent = open ? '← Back' : 'Next →';
+}
 
-  // Scene
+// 3D car — init immediately on load (viewer is always visible)
+(function initCar() {
+  const wrap   = document.getElementById('car-wrap');
+  const loader = document.getElementById('car-loader');
+  const fig    = document.getElementById('car-fig');
+
   const scene = new THREE.Scene();
-  const cam = new THREE.PerspectiveCamera(42, wrap.clientWidth/wrap.clientHeight, 1, 200000);
+  scene.background = new THREE.Color(0x0c0c0c);
 
-  const renderer = new THREE.WebGLRenderer({antialias:true, alpha:true});
+  const cam = new THREE.PerspectiveCamera(42, fig.clientWidth / fig.clientHeight, 1, 200000);
+
+  const renderer = new THREE.WebGLRenderer({antialias: true});
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setSize(wrap.clientWidth, wrap.clientHeight);
+  renderer.setSize(fig.clientWidth, fig.clientHeight);
   renderer.outputEncoding = THREE.sRGBEncoding;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.15;
+  renderer.toneMappingExposure = 1.2;
   wrap.appendChild(renderer.domElement);
 
-  // Lighting — warm key, cool fill, red rim
-  scene.add(new THREE.AmbientLight(0xffffff, 0.35));
+  // Lights
+  scene.add(new THREE.AmbientLight(0xffffff, 0.4));
   const key = new THREE.DirectionalLight(0xfff8f0, 1.3);
   key.position.set(5000, 8000, 6000); scene.add(key);
-  const fill = new THREE.DirectionalLight(0xf0f5ff, 0.45);
+  const fill = new THREE.DirectionalLight(0xf0f5ff, 0.4);
   fill.position.set(-4000, 3000, -3000); scene.add(fill);
-  const rim = new THREE.DirectionalLight(0xff1818, 0.25);
+  const rim = new THREE.DirectionalLight(0xff2020, 0.18);
   rim.position.set(0, -800, -8000); scene.add(rim);
 
-  // Orbit state — calibrated to your car's coordinate system
-  // Car: X=-1300→4160 (nose→tail), Y=0→1000 (up), Z=-900→900 (width)
-  // Centre: (1430, 500, 0)
-  const TARGET = new THREE.Vector3(1430, 350, 0);
-  let sph = {theta: 0.62, phi: 1.1, r: 9000}; // slight front-left elevated view
+  // Orbit (BoxCar: X=-1300→4160, Y=0→1000, Z=-900→900)
+  const T = new THREE.Vector3(1430, 350, 0);
+  let sph = {theta: 0.62, phi: 1.1, r: 9000}, autoRot = true, drag = false, lx = 0, ly = 0;
 
-  function camPos(){
-    const x = TARGET.x + sph.r * Math.sin(sph.phi) * Math.sin(sph.theta);
-    const y = TARGET.y + sph.r * Math.cos(sph.phi);
-    const z = TARGET.z + sph.r * Math.sin(sph.phi) * Math.cos(sph.theta);
-    cam.position.set(x, y, z);
-    cam.lookAt(TARGET);
+  function update() {
+    cam.position.set(
+      T.x + sph.r * Math.sin(sph.phi) * Math.sin(sph.theta),
+      T.y + sph.r * Math.cos(sph.phi),
+      T.z + sph.r * Math.sin(sph.phi) * Math.cos(sph.theta)
+    );
+    cam.lookAt(T);
   }
-  camPos();
+  update();
 
-  // Input
-  let drag = false, lx = 0, ly = 0, autoRot = true;
-  const canvas = renderer.domElement;
-  canvas.addEventListener('mousedown', e=>{drag=true;lx=e.clientX;ly=e.clientY;autoRot=false});
-  window.addEventListener('mouseup', ()=>{drag=false});
-  window.addEventListener('mousemove', e=>{
-    if(!drag) return;
+  const cv = renderer.domElement;
+  cv.addEventListener('mousedown', e => { drag=true; lx=e.clientX; ly=e.clientY; autoRot=false; });
+  window.addEventListener('mouseup', () => { drag=false; });
+  window.addEventListener('mousemove', e => {
+    if (!drag) return;
     sph.theta -= (e.clientX-lx)*0.004;
-    sph.phi = Math.max(0.08, Math.min(Math.PI*0.92, sph.phi-(e.clientY-ly)*0.004));
-    lx=e.clientX; ly=e.clientY; camPos();
+    sph.phi = Math.max(0.08, Math.min(Math.PI*.92, sph.phi-(e.clientY-ly)*0.004));
+    lx=e.clientX; ly=e.clientY; update();
   });
-  canvas.addEventListener('wheel', e=>{
-    sph.r = Math.max(1500, Math.min(25000, sph.r+e.deltaY*4));
-    camPos(); e.preventDefault();
-  },{passive:false});
-  // Touch
-  let ptx=0,pty=0;
-  canvas.addEventListener('touchstart', e=>{if(e.touches.length===1){ptx=e.touches[0].clientX;pty=e.touches[0].clientY;autoRot=false}});
-  canvas.addEventListener('touchmove', e=>{
+  cv.addEventListener('wheel', e => {
+    sph.r = Math.max(2000, Math.min(22000, sph.r+e.deltaY*4));
+    update(); e.preventDefault();
+  }, {passive:false});
+  let ptx=0, pty=0;
+  cv.addEventListener('touchstart', e => { if(e.touches.length===1){ptx=e.touches[0].clientX;pty=e.touches[0].clientY;autoRot=false;} });
+  cv.addEventListener('touchmove', e => {
     if(e.touches.length===1){
       sph.theta-=(e.touches[0].clientX-ptx)*0.005;
-      sph.phi=Math.max(0.08,Math.min(Math.PI*0.92,sph.phi-(e.touches[0].clientY-pty)*0.005));
-      ptx=e.touches[0].clientX;pty=e.touches[0].clientY;camPos();e.preventDefault();
+      sph.phi=Math.max(0.08,Math.min(Math.PI*.92,sph.phi-(e.touches[0].clientY-pty)*0.005));
+      ptx=e.touches[0].clientX;pty=e.touches[0].clientY;update();e.preventDefault();
     }
   },{passive:false});
-
-  window.addEventListener('resize',()=>{
-    cam.aspect=wrap.clientWidth/wrap.clientHeight;
+  window.addEventListener('resize', () => {
+    cam.aspect = fig.clientWidth/fig.clientHeight;
     cam.updateProjectionMatrix();
-    renderer.setSize(wrap.clientWidth,wrap.clientHeight);
+    renderer.setSize(fig.clientWidth, fig.clientHeight);
   });
 
-  // ── LOAD GLTF ─────────────────────────────────────────────────────────────
-  // Loads BoxCar.gltf (which references BoxCar.bin — both must be in repo root)
-  const gltfScript = document.createElement('script');
-  gltfScript.src = 'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js';
-  gltfScript.onload = () => {
-    const loader = new THREE.GLTFLoader();
-    loader.load(
-      'BoxCar.gltf',            // ← your exported file (BoxCar.bin must sit next to it)
-      gltf => {
-        loaderEl.style.display = 'none';
-        const model = gltf.scene;
-        // The model is already in mm-scale matching our TARGET/orbit setup.
-        // Just add it directly.
-        scene.add(model);
-        // Optionally recompute centre from actual bounding box:
-        const box = new THREE.Box3().setFromObject(model);
-        const centre = box.getCenter(new THREE.Vector3());
-        const size   = box.getSize(new THREE.Vector3());
-        TARGET.copy(centre);
-        TARGET.y = box.min.y + size.y * 0.35; // aim slightly below vertical centre
-        sph.r = Math.max(size.x, size.y, size.z) * 2.0;
-        camPos();
-      },
-      xhr => {
-        // Update loader text with progress
-        if(xhr.total) {
-          const pct = Math.round(xhr.loaded/xhr.total*100);
-          loaderEl.firstChild.textContent = `Loading Car — ${pct}%`;
-        }
-      },
-      err => {
-        console.warn('GLTF load failed, trying OBJ fallback:', err);
-        tryOBJ();
-      }
-    );
-  };
-  gltfScript.onerror = tryOBJ;
-  document.head.appendChild(gltfScript);
-
-  function tryOBJ(){
-    const objScript = document.createElement('script');
-    objScript.src = 'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js';
-    objScript.onload = () => {
-      const loader = new THREE.OBJLoader();
-      loader.load(
-        'BoxCar.obj',
-        obj => {
-          loaderEl.style.display = 'none';
-          // Apply a single matte material with slight colour variation per mesh
-          const palette = [0x1a6e3c,0x4a7bb5,0x8b5e3c,0xc0141a,0xe8e8e8,0x3a6ea5,0x555555,0xaa8833];
-          let i=0;
-          obj.traverse(child => {
-            if(child.isMesh){
-              child.material = new THREE.MeshStandardMaterial({
-                color: palette[i++ % palette.length],
-                roughness: 0.65, metalness: 0.2
-              });
-            }
-          });
-          scene.add(obj);
-          const box = new THREE.Box3().setFromObject(obj);
-          const centre = box.getCenter(new THREE.Vector3());
-          const size   = box.getSize(new THREE.Vector3());
-          TARGET.copy(centre);
-          TARGET.y = box.min.y + size.y * 0.35;
-          sph.r = Math.max(size.x, size.y, size.z) * 2.0;
-          camPos();
-        },
-        null,
-        err2 => {
-          loaderEl.innerHTML = '<div style="color:#555;font-size:9px;letter-spacing:2px;text-align:center">Place BoxCar.gltf + BoxCar.bin<br>in your repo root</div>';
-        }
-      );
-    };
-    document.head.appendChild(objScript);
-  }
-
-  // Animate
-  function animate(){
+  function animate() {
     requestAnimationFrame(animate);
-    if(autoRot){ sph.theta += 0.0012; camPos(); }
+    if (autoRot) { sph.theta+=0.0014; update(); }
     renderer.render(scene, cam);
   }
   animate();
+
+  // Load model
+  const gs = document.createElement('script');
+  gs.src = 'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js';
+  gs.onload = () => {
+    new THREE.GLTFLoader().load('BoxCar.gltf',
+      gltf => {
+        loader.style.display='none';
+        scene.add(gltf.scene);
+        const box = new THREE.Box3().setFromObject(gltf.scene);
+        T.copy(box.getCenter(new THREE.Vector3()));
+        sph.r = box.getSize(new THREE.Vector3()).length() * 1.05;
+        update();
+      },
+      null,
+      () => tryOBJ()
+    );
+  };
+  gs.onerror = tryOBJ;
+  document.head.appendChild(gs);
+
+  function tryOBJ() {
+    const os = document.createElement('script');
+    os.src = 'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js';
+    os.onload = () => {
+      new THREE.OBJLoader().load('BoxCar.obj',
+        obj => {
+          loader.style.display='none';
+          const pal=[0x1a6e3c,0x4a7bb5,0x8b5e3c,0xc0141a,0xcccccc,0x3a6ea5,0x666,0xaa8833];
+          let i=0;
+          obj.traverse(c=>{if(c.isMesh)c.material=new THREE.MeshStandardMaterial({color:pal[i++%pal.length],roughness:.65,metalness:.2});});
+          scene.add(obj);
+          const box=new THREE.Box3().setFromObject(obj);
+          T.copy(box.getCenter(new THREE.Vector3()));
+          sph.r=box.getSize(new THREE.Vector3()).length()*1.05;
+          update();
+        },
+        null,
+        ()=>{loader.textContent='Add BoxCar.gltf + BoxCar.bin to repo root';}
+      );
+    };
+    document.head.appendChild(os);
+  }
 })();
 </script>
 </body>
