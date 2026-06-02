@@ -1,522 +1,810 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="description" content="Habiba Morsy – PhD Student in Data Science at University of Virginia."/>
-<title>Habiba Morsy | PhD Student @ UVA</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Source+Sans+3:wght@300;400;500&display=swap" rel="stylesheet"/>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --red:#c41a1a;
-  --text:#111;
-  --muted:#666;
-  --light:#999;
-  --bg:#fff;
-  --serif:'Source Serif 4',Georgia,serif;
-  --sans:'Source Sans 3','Helvetica Neue',sans-serif;
-}
-html{scroll-behavior:smooth}
-body{
-  background:var(--bg);color:var(--text);
-  font-family:var(--sans);font-size:16px;line-height:1.6;
-  max-width:720px;margin:0 auto;padding:0 28px;
-}
-a{color:var(--red);text-decoration:none}
-a:hover{text-decoration:underline}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Habiba Morsy</title>
 
-/* ── HEADER ── */
-header{padding:52px 0 36px}
-h1{
-  font-family:var(--serif);font-size:2.4rem;font-weight:600;
-  letter-spacing:-.5px;margin-bottom:18px;
-}
-nav{display:flex;gap:22px;flex-wrap:wrap;margin-bottom:0}
-nav a{font-size:15px;color:var(--muted);font-weight:400}
-nav a:hover{color:var(--red);text-decoration:none}
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-/* ── SECTIONS ── */
-section{padding:48px 0 0}
-h2{
-  font-family:var(--serif);font-size:1.5rem;font-weight:600;
-  margin-bottom:28px;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-/* ── ABOUT ── */
-.about-grid{display:grid;grid-template-columns:1fr 148px;gap:40px;align-items:start;margin-bottom:20px}
-.about-bio{font-size:15.5px;line-height:1.8;color:#222}
-.about-bio p{margin-bottom:14px}
-.about-bio p:last-child{margin-bottom:0}
-.about-photo{
-  width:148px;height:148px;border-radius:4px;
-  background:#eee;overflow:hidden;
-  display:flex;align-items:center;justify-content:center;
-  font-size:11px;color:var(--light);text-align:center;
-}
-.about-photo img{width:100%;height:100%;object-fit:cover}
-.keywords{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 20px}
-.kw{
-  font-size:13px;color:var(--muted);
-  border:1px solid #ddd;padding:3px 11px;border-radius:20px;
-}
-.social-links{display:flex;gap:18px;flex-wrap:wrap;margin-top:4px}
-.social-links a{font-size:14px;color:var(--muted)}
-.social-links a:hover{color:var(--red);text-decoration:none}
+    body {
+      margin: 0;
+      background: #f8f1f4;
+      color: #2b2b2b;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      line-height: 1.65;
+    }
 
-/* ── PROJECTS ── */
-.project{margin-bottom:44px}
-.project-fig{
-  position:relative;overflow:hidden;
-  background:#f4f4f4;border-radius:4px;
-  margin-bottom:14px;
-  height:220px;
-  cursor:default;
-}
-/* The 3D car viewer lives here for the BoxCar project */
-.project-fig.viewer-fig{
-  height:280px;background:#0c0c0c;
-}
-.project-fig img{
-  width:100%;height:100%;object-fit:cover;
-  display:block;
-  transition:opacity .3s;
-}
-.fig-hover-img{
-  position:absolute;inset:0;
-  opacity:0;transition:opacity .3s;
-  display:flex;align-items:center;justify-content:center;
-  background:#f4f4f4;
-}
-.fig-hover-img img{width:100%;height:100%;object-fit:cover}
-.project-fig:hover .fig-hover-img{opacity:1}
-.hover-hint{
-  font-size:11px;color:var(--light);
-  margin-top:-10px;margin-bottom:14px;
-}
-.project h3{
-  font-family:var(--serif);font-size:1.08rem;font-weight:600;
-  margin-bottom:7px;line-height:1.4;
-}
-.project-desc{font-size:14.5px;color:#333;line-height:1.75;margin-bottom:10px}
-.project-links{display:flex;gap:14px;flex-wrap:wrap}
-.project-links a{font-size:14px;font-weight:500}
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-/* car viewer */
-.car-wrap{position:absolute;inset:0;cursor:grab}
-.car-wrap:active{cursor:grabbing}
-.car-wrap canvas{width:100%!important;height:100%!important;display:block}
-.car-ui{
-  position:absolute;bottom:0;left:0;right:0;
-  padding:8px 14px;
-  background:linear-gradient(transparent,rgba(0,0,0,.55));
-  display:flex;justify-content:space-between;
-  pointer-events:none;
-  font-size:11px;font-family:monospace;letter-spacing:1px;text-transform:uppercase;
-}
-.car-ui-left{color:rgba(255,255,255,.45)}
-.car-ui-right{color:rgba(255,255,255,.3)}
-.car-loader{
-  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  font-size:11px;font-family:monospace;color:#444;letter-spacing:1px;
-  text-transform:uppercase;text-align:center;pointer-events:none;
-}
+    a:hover {
+      text-decoration: underline;
+    }
 
-/* ── NEWS ── */
-table.news{width:100%;border-collapse:collapse}
-table.news td{
-  padding:9px 0;vertical-align:top;
-  border-bottom:1px solid #f0f0f0;
-  font-size:14.5px;
-}
-table.news td:first-child{
-  width:140px;padding-right:20px;
-  color:var(--muted);white-space:nowrap;
-  font-size:13.5px;
-}
-.news-more-btn{
-  margin-top:12px;font-size:14px;color:var(--red);
-  cursor:pointer;background:none;border:none;padding:0;
-  font-family:var(--sans);
-}
-.news-more-btn:hover{text-decoration:underline;cursor:pointer}
-.news-extra{display:none}
-.news-extra.show{display:table-row-group}
+    /* ---------- Landing Page ---------- */
 
-/* ── EDUCATION ── */
-.edu-entry{margin-bottom:28px}
-.edu-entry h3{
-  font-family:var(--serif);font-size:1.05rem;font-weight:600;
-  margin-bottom:2px;
-}
-.edu-entry .deg{font-size:15px;color:#222;margin-bottom:1px}
-.edu-entry .dates{font-size:13.5px;color:var(--muted)}
-.edu-entry .detail{font-size:13.5px;color:var(--muted);margin-top:3px;line-height:1.5}
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 20px;
+    }
 
-/* ── CV ── */
-.cv-download{
-  display:inline-flex;align-items:center;gap:8px;
-  font-size:15px;font-weight:500;
-  color:#fff;background:var(--red);
-  padding:10px 22px;border-radius:4px;
-  margin-top:4px;transition:opacity .15s;
-}
-.cv-download:hover{opacity:.85;text-decoration:none}
+    .hero h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(4rem, 8vw, 7rem);
+      font-weight: 400;
+      letter-spacing: 2px;
+      line-height: 1;
+      margin: 0 0 32px;
+    }
 
-/* ── FOOTER ── */
-footer{
-  padding:48px 0 36px;
-  font-size:13px;color:var(--muted);
-}
+    .paper-link {
+      color: #1a5fb4;
+      text-decoration: underline;
+      font-weight: 600;
+    }
 
-/* ── RESPONSIVE ── */
-@media(max-width:540px){
-  .about-grid{grid-template-columns:1fr}
-  .about-photo{width:100px;height:100px}
-  h1{font-size:1.9rem}
-}
-</style>
+    .paper-link:hover {
+      color: #0b3d78;
+    }
+
+    .nav-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 58px;
+    }
+
+    .nav-buttons a {
+      border: 1px solid #2b2b2b;
+      border-radius: 999px;
+      padding: 7px 21px;
+      font-size: 0.78rem;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+      transition: 0.2s ease;
+      background: transparent;
+    }
+
+    .nav-buttons a:hover {
+      background: #2b2b2b;
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 22px;
+      justify-content: center;
+      margin-bottom: 58px;
+    }
+
+    .social-icons a {
+      width: 44px;
+      height: 44px;
+      border: 1px solid #2b2b2b;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      transition: 0.2s ease;
+    }
+
+    .social-icons a:hover {
+      background: #2b2b2b;
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    .down-arrow {
+      font-size: 2rem;
+      animation: bounce 1.8s infinite;
+    }
+
+    .down-arrow:hover {
+      text-decoration: none;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-8px); }
+      60% { transform: translateY(-4px); }
+    }
+
+    /* ---------- General Sections ---------- */
+
+    section {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 90px 24px;
+    }
+
+    .section-title {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.8rem, 5vw, 4rem);
+      text-align: center;
+      margin: 0 0 70px;
+      line-height: 1.1;
+    }
+
+    /* ---------- About ---------- */
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 70px;
+      align-items: center;
+    }
+
+    .profile-photo {
+      width: 280px;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid #2b2b2b;
+    }
+
+    .about-text {
+      font-size: 1.08rem;
+      color: #555555;
+    }
+
+    .about-text a {
+      color: #2b2b2b;
+      text-decoration: underline;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .tag {
+      background: #e6dfe2;
+      color: #2b2b2b;
+      border-radius: 999px;
+      padding: 8px 18px;
+      font-size: 0.9rem;
+    }
+
+    /* ---------- Projects ---------- */
+
+    .model-viewer-wrap {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 0;
+    }
+
+    .mv-label {
+      position: absolute;
+      top: 12px;
+      right: 14px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.72rem;
+      color: #1a1a1a;
+      letter-spacing: 0.5px;
+      pointer-events: none;
+      z-index: 10;
+      line-height: 1.5;
+      text-align: right;
+    }
+
+    .mv-controls {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 10;
+    }
+
+    .mv-controls button {
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      border-radius: 999px;
+      padding: 5px 14px;
+      font-size: 0.75rem;
+      font-family: 'Courier New', Courier, monospace;
+      letter-spacing: 0.5px;
+      color: #1a1a1a;
+      cursor: pointer;
+      backdrop-filter: blur(4px);
+      transition: background 0.15s;
+      white-space: nowrap;
+    }
+
+    .mv-controls button:hover {
+      background: rgba(255, 255, 255, 0.95);
+    }
+
+    .mv-controls button.active {
+      background: #2b2b2b;
+      color: #fff;
+      border-color: #2b2b2b;
+    }
+
+    .aerogen-card .project-figure {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.45s ease, opacity 0.35s ease, margin-bottom 0.35s ease;
+    }
+
+    .aerogen-card:hover .project-figure {
+      max-height: 520px;
+      opacity: 1;
+      margin-bottom: 28px;
+    }
+
+    .projects-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .project-card {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 42px 46px;
+      margin-bottom: 34px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.04);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
+    }
+
+    .project-figure {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.45s ease, opacity 0.35s ease, margin-bottom 0.35s ease;
+    }
+
+    .project-card:hover .project-figure {
+      max-height: 700px;
+      opacity: 1;
+      margin-bottom: 28px;
+    }
+
+    .project-figure img {
+      width: 100%;
+      display: block;
+      border-radius: 8px;
+    }
+
+    .project-card h3 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.65rem;
+      margin: 0 0 18px;
+      line-height: 1.25;
+    }
+
+    .project-card p {
+      color: #555555;
+      margin: 0 0 20px;
+      font-size: 1rem;
+    }
+
+    .project-links {
+      margin-top: 12px;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .project-links a {
+      margin-right: 20px;
+    }
+
+    .hover-note {
+      color: #777777;
+      font-size: 0.85rem;
+      margin-top: 14px;
+    }
+
+    /* ---------- News ---------- */
+
+    .news-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .news-page { display: none; }
+    .news-page.active { display: block; }
+
+    .news-row {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 28px;
+      padding: 20px 0;
+      border-bottom: 1px solid #d2c9cd;
+      color: #555555;
+      font-size: 0.92rem;
+    }
+
+    .news-date {
+      color: #2b2b2b;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 0.88rem;
+    }
+
+    .news-pagination {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 40px;
+    }
+
+    .news-pagination button {
+      border: 1px solid #2b2b2b;
+      border-radius: 999px;
+      padding: 8px 22px;
+      font-size: 0.82rem;
+      letter-spacing: 0.5px;
+      background: transparent;
+      color: #2b2b2b;
+      cursor: pointer;
+      transition: 0.2s ease;
+      font-family: inherit;
+    }
+
+    .news-pagination button:hover {
+      background: #2b2b2b;
+      color: #fff;
+    }
+
+    .news-pagination button:disabled {
+      opacity: 0.25;
+      cursor: default;
+    }
+
+    .news-pagination button:disabled:hover {
+      background: transparent;
+      color: #2b2b2b;
+    }
+
+    /* ---------- Education ---------- */
+
+    .timeline {
+      max-width: 850px;
+      margin: 0 auto;
+      border-left: 2px solid #b8b0b4;
+      padding-left: 38px;
+      position: relative;
+    }
+
+    .edu-item {
+      position: relative;
+      margin-bottom: 46px;
+    }
+
+    .edu-item::before {
+      content: "";
+      position: absolute;
+      left: -46px;
+      top: 8px;
+      width: 12px;
+      height: 12px;
+      background: #2b2b2b;
+      border-radius: 50%;
+    }
+
+    .edu-item h3 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.55rem;
+      margin: 0 0 4px;
+    }
+
+    .edu-item p {
+      margin: 0 0 6px;
+      font-size: 1.05rem;
+      color: #333333;
+    }
+
+    .edu-date {
+      color: #666666;
+      font-size: 0.95rem;
+    }
+
+    /* ---------- Footer ---------- */
+
+    footer {
+      text-align: center;
+      padding: 60px 20px 36px;
+      color: #555555;
+      font-size: 0.95rem;
+    }
+
+    footer a {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 780px) {
+      .hero h1 { font-size: 3.6rem; }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+        text-align: left;
+      }
+
+      .profile-photo {
+        width: 220px;
+        height: 220px;
+        margin: 0 auto;
+      }
+
+      .project-card { padding: 32px 28px; }
+
+      .news-row {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<header>
-  <h1>Habiba Morsy</h1>
-  <nav>
-    <a href="#about">About</a>
-    <a href="#projects">Projects</a>
-    <a href="#news">News</a>
-    <a href="#education">Education</a>
-    <a href="CV.pdf">CV</a>
-  </nav>
-</header>
+  <!-- Landing Page -->
+  <header class="hero">
+    <h1>HABIBA MORSY</h1>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="about-grid">
-    <div class="about-bio">
-      <p>Hi! I'm Habiba, a PhD student in Data Science at the <a href="https://datascience.virginia.edu" target="_blank">University of Virginia</a>.</p>
-      <p>My research is at the intersection of machine learning, large language models, and scientific discovery — from automating quality assurance of digital library metadata to foundation models for computational materials science.</p>
-      <p>Before UVA I completed a B.S. in Science and Technology (Applied Mathematics, CS minor) and an M.S. in Computational Science and Engineering at Kean University.</p>
+    <nav class="nav-buttons">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#news">News</a>
+      <a href="#education">Education</a>
+      <a href="assets/cv.pdf" target="_blank">CV</a>
+    </nav>
+
+    <div class="social-icons">
+      <a href="https://www.linkedin.com/in/habiba-morsy/" target="_blank" aria-label="LinkedIn">
+        <i class="fa-brands fa-linkedin-in"></i>
+      </a>
+      <a href="https://github.com/habiba-m" target="_blank" aria-label="GitHub">
+        <i class="fa-brands fa-github"></i>
+      </a>
     </div>
-    <div class="about-photo">
-      <!-- Replace with: <img src="photo.jpg" alt="Habiba Morsy"> -->
-      photo.jpg
+
+    <a href="#about" class="down-arrow" aria-label="Scroll down">
+      <i class="fa-solid fa-chevron-down"></i>
+    </a>
+  </header>
+
+  <!-- About -->
+  <section id="about">
+    <h2 class="section-title">About</h2>
+
+    <div class="about-grid">
+      <img src="img/profile.jpg" alt="Habiba Morsy" class="profile-photo" />
+
+      <div class="about-text">
+        <p>
+          I'm a Ph.D. student in Data Science at the University of Virginia, advised by
+          <a href="https://stephenbaek.github.io/lab/" target="_blank">Professor Stephen Baek</a>.
+          My research focuses on scientific machine learning, physics-aware deep learning, and
+          data-driven design for physical systems. I am currently working on autonomous aerodynamic
+          design pipelines for Formula 1 car geometries, combining parametric modeling,
+          simulation-ready datasets, and deep learning for design exploration.
+        </p>
+
+        <p>
+          Before joining UVA, I earned my B.S. in Computational Science and Engineering from
+          Kean University, with minors in Computer Science and Applied Mathematics. I have also
+          worked on research projects involving physics-aware deep learning for energetic materials,
+          large language models, and open source software development.
+        </p>
+
+        <div class="tags">
+          <span class="tag">Scientific Machine Learning</span>
+          <span class="tag">Physics-Aware Deep Learning</span>
+          <span class="tag">Aerodynamic Design</span>
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <div class="keywords">
-    <span class="kw">Large Language Models</span>
-    <span class="kw">Machine Learning</span>
-    <span class="kw">Data Science</span>
-    <span class="kw">Computational Science</span>
-    <span class="kw">F1 · FIA 2026</span>
-  </div>
+  <!-- Projects -->
+  <section id="projects">
+    <h2 class="section-title">Projects & Papers</h2>
 
-  <div class="social-links">
-    <a href="https://linkedin.com/in/" target="_blank">LinkedIn</a>
-    <a href="https://github.com/" target="_blank">GitHub</a>
-    <a href="https://scholar.google.com/" target="_blank">Google Scholar</a>
+    <div class="projects-wrap">
+
+      <!-- AeroGen -->
+      <div class="project-card aerogen-card">
+        <div class="project-figure model-figure">
+          <div class="model-viewer-wrap">
+            <div class="mv-label">2026 FIA Technical Regulations</div>
+            <model-viewer
+              id="aerogen-viewer"
+              src="assets/BoxCar.gltf"
+              alt="Rotating FIA 2026 reference box car model"
+              camera-controls
+              auto-rotate
+              rotation-per-second="28deg"
+              camera-orbit="45deg 70deg auto"
+              exposure="1"
+              shadow-intensity="1"
+              style="width: 100%; height: 420px; background: #f8f1f4; border-radius: 8px; display: block;">
+            </model-viewer>
+            <div class="mv-controls">
+              <button id="btn-rotate" class="active" onclick="toggleRotate(this)">⟳ Auto-rotate</button>
+              <button onclick="resetCamera()">⤢ Reset view</button>
+            </div>
+          </div>
+        </div>
+
+        <h3>AeroGen</h3>
+
+        <p>
+          AeroGen is my dissertation research project building an autonomous aerodynamic
+          design pipeline for Formula 1 car geometries under the FIA 2026 regulations.
+          The first stage, now completed, is a procedural reconstruction of the FIA 2026
+          reference box car: a full regulation-compliant geometry encoding more than 35
+          reference volumes from the technical regulations using CSG boolean operations
+          and plane trims. This envelope defines the legal boundary that every generated
+          design must satisfy.
+        </p>
+
+        <p>
+          The next stage constructs a parametric F1 car inside this envelope, controlled
+          by a design parameter dictionary. Sampling the parameter space programmatically
+          generates a large dataset of regulation-compliant geometry variations, which
+          feeds into CFD simulations to produce aerodynamic performance labels. This
+          labeled dataset will support deep learning models for fast aerodynamic design
+          exploration, reducing the need to run CFD at every design point.
+        </p>
+
+        <div class="project-links">
+          <a href="assets/f1car.avi" target="_blank">F1 Parametric Car Demo →</a>
+        </div>
+
+        <div class="hover-note">↑ Hover to see rotating reference box car</div>
+      </div>
+
+      <!-- rcsb-api -->
+      <div class="project-card">
+        <div class="project-figure">
+          <img src="img/rcsbworkflow.png" alt="RCSB API workflow figure" />
+        </div>
+
+        <h3>rcsb-api</h3>
+
+        <p>
+          A Python package for programmatic access to the RCSB Protein Data Bank — home to over
+          230,000 3D structures of proteins, nucleic acids, and macromolecular machines. The package
+          wraps the RCSB Search and Data APIs in a Pythonic interface, allowing researchers to query,
+          retrieve, and integrate structural biology data without needing to understand the underlying
+          GraphQL schema. Published in
+          <a class="paper-link" href="https://www.sciencedirect.com/science/article/pii/S0022283625000361" target="_blank">
+            <em>Journal of Molecular Biology</em> (2025)
+          </a>.
+        </p>
+
+        <div class="project-links">
+          <a href="assets/rcsb-api.pdf" target="_blank">Read Paper →</a>
+          <a href="assets/Habiba-5MP.pdf" target="_blank">Presentation →</a>
+          <a href="assets/Habiba-RISE-Poster.pdf" target="_blank">Poster →</a>
+          <a href="https://pypi.org/project/rcsb-api/" target="_blank">PyPI →</a>
+        </div>
+
+        <div class="hover-note">↑ Hover to see figure</div>
+      </div>
+
+      <!-- HPC-ED -->
+      <div class="project-card">
+        <div class="project-figure">
+          <img src="/img/hpc.png" alt="HPC-ED metadata quality assurance workflow figure" />
+        </div>
+        <h3>HPC-ED</h3>
+        <p>
+          HPC-ED is a federated catalog that aggregates training materials — tutorials,
+          workshops, and course modules — from partner institutions across the HPC and
+          cyberinfrastructure community. As part of the project, I built a proof-of-concept
+          automated quality assurance system that uses a two-stage LLM pipeline to crawl
+          catalog entries, including YouTube transcript extraction, summarize content, and
+          score metadata accuracy against the actual resource. The system was evaluated across
+          GPT-3.5 Turbo, GPT-4o Mini, GPT-4.1 Nano, and GPT-4.1 Mini. Published and presented
+          at BPHTE '25, the SC Workshop on Best Practices for HPC Training and Education.
+        </p>
+        <div class="project-links">
+          <a href="assets/BPHTE25_FULL.pdf" target="_blank">Read Paper →</a>
+          <a href="assets/BPHTE25_Slides.pdf" target="_blank">Slides →</a>
+          <a href="https://github.com/habiba-m/hpc-metadata-evaluator" target="_blank">Code →</a>
+          <a href="https://hpc-ed.github.io/" target="_blank">HPC-ED →</a>
+        </div>
+        <div class="hover-note">↑ Hover to see figure</div>
+      </div>
+
+      <!-- OmniPARC -->
+      <div class="project-card">
+        <h3>OmniPARC</h3>
+        <div class="project-figure">
+          <img src="img/parcv2.png" alt="PARCv2 architecture figure" />
+        </div>
+        <p>
+          OmniPARC is a physics-aware neural surrogate model for shock-compressed solid
+          reactive materials. The project works toward foundation models for energetic
+          materials by learning shared dynamics across different chemical species and
+          microstructural geometries, enabling prediction and analysis of
+          chemistry–structure–performance relationships.
+        </p>
+        <div class="project-links">
+          <a href="assets/2026_ICT_Foundation_submission.pdf" target="_blank">Abstract →</a>
+        </div>
+        <div class="hover-note">↑ Hover to see figure</div>
+      </div>
+
+      <!-- LLM Dashboard -->
+      <div class="project-card">
+        <div class="project-figure">
+          <img src="img/llm-dashboard.png" alt="Screenshot of the LLM dashboard interface" />
+        </div>
+        <h3>LLM Dashboard for Carnegie Classification Queries</h3>
+        <p>
+          Built an LLM and retrieval-augmented generation application for answering queries
+          related to the Carnegie Classification of Institutions of Higher Education (CCIHE)
+          through a React dashboard. The system retrieves relevant information, generates
+          responses, and dynamically updates a database with new question–answer pairs,
+          improving access to higher education classification data while supporting secure
+          and user-friendly interaction.
+        </p>
+        <div class="project-links">
+          <a href="https://github.com/blackmoc/CCHIE_Application" target="_blank">Code →</a>
+          <a href="assets/CCIHE_Slides.pdf" target="_blank">Slides →</a>
+        </div>
+        <div class="hover-note">↑ Hover to see figure</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- News -->
+  <section id="news">
+    <h2 class="section-title">News</h2>
+
+    <div class="news-wrap">
+
+      <!-- Page 1 -->
+      <div class="news-page active" id="news-p1">
+        <div class="news-row">
+          <div class="news-date">April 2026</div>
+          <div>Abstract accepted for <em>Towards Foundation Models for Shock Compression of Solid Reactive Materials</em> at the International Annual Conference of the Fraunhofer ICT.</div>
+        </div>
+        <div class="news-row">
+          <div class="news-date">November 2025</div>
+          <div>Presented <em>HPC-ED: Testing Automated Agents to Assess the Quality of Training Resource Metadata</em> at BPHTE '25, the SC Workshop on Best Practices for HPC Training and Education. <a class="paper-link" href="assets/BPHTE25_Slides.pdf" target="_blank">Slides →</a></div>
+        </div>
+        <div class="news-row">
+          <div class="news-date">August 2025</div>
+          <div>Published <em>rcsb-api: Python Toolkit for Streamlining Access to RCSB Protein Data Bank APIs</em> in <a class="paper-link" href="https://www.sciencedirect.com/science/article/pii/S0022283625000361" target="_blank"><em>Journal of Molecular Biology</em></a>.</div>
+        </div>
+        <div class="news-row">
+          <div class="news-date">August 2025</div>
+          <div>Transferred from my Master's to Ph.D. in Data Science at the University of Virginia.</div>
+        </div>
+        <div class="news-row">
+          <div class="news-date">May 2025</div>
+          <div>Completed my master's thesis at Kean University on using large language models to automate quality assurance of digital library metadata. <a class="paper-link" href="assets/BPHTE25_FULL.pdf" target="_blank">Paper →</a></div>
+        </div>
+      </div>
+
+      <!-- Page 2 -->
+      <div class="news-page" id="news-p2">
+        <div class="news-row">
+          <div class="news-date">Jan 2025</div>
+          <div>Started Master's Degree in Data Science at Kean University.</div>
+        </div>
+        <div class="news-row">
+          <div class="news-date">December 2024</div>
+          <div>Graduated from Kean University with a B.S. in Computational Science and Engineering. Received the Distinction in Research Award.</div>
+        </div>
+        <div class="news-row">
+          <div class="news-date">November 2024</div>
+          <div>Presented <em>rcsb-api: Streamlining Programmatic Access to Structural Biology Data with Python</em> at the ABRCMS Conference. <a class="paper-link" href="assets/Habiba-RISE-Poster.pdf" target="_blank">Poster →</a></div>
+        </div>
+        <div class="news-row">
+          <div class="news-date">August 2024</div>
+          <div>Presented <em>rcsb-api</em> at the Rutgers RISE REU Symposium. <a class="paper-link" href="assets/Habiba-RISE-Poster.pdf" target="_blank">Poster →</a> <a class="paper-link" href="assets/Habiba-5MP.pdf" target="_blank">Slides →</a></div>
+        </div>
+        <div class="news-row">
+          <div class="news-date">May 2024</div>
+          <div>Started internship at the RCSB Protein Data Bank as a software developer.</div>
+        </div>
+      </div>
+
+      <div class="news-pagination">
+        <button id="news-prev" onclick="newsPage(-1)" disabled>← Prev</button>
+        <button id="news-next" onclick="newsPage(1)">Next →</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section id="education">
+    <h2 class="section-title">Education</h2>
+
+    <div class="timeline">
+      <div class="edu-item">
+        <h3>University of Virginia</h3>
+        <p>Ph.D. in Data Science</p>
+        <div class="edu-date">2025 – 2030</div>
+      </div>
+
+      <div class="edu-item">
+        <h3>Kean University</h3>
+        <p>B.S. in Computational Science and Engineering</p>
+        <p>Minors: Computer Science and Applied Mathematics</p>
+        <div class="edu-date">2021 – 2024</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Habiba Morsy ·
     <a href="mailto:crv4jj@virginia.edu">crv4jj@virginia.edu</a>
-    <a href="CV.pdf" target="_blank">CV</a>
-  </div>
-</section>
+  </footer>
 
-<!-- PROJECTS -->
-<section id="projects">
-  <h2>Projects &amp; Papers</h2>
+  <script>
+    // ---------- News pagination ----------
+    const totalPages = 2;
+    let currentPage = 1;
 
-  <!-- PC-ED -->
-  <div class="project">
-    <div class="project-fig">
-      <div class="fig-hover-img"><img src="" alt="" onerror="this.style.display='none'"/></div>
-    </div>
-    <p class="hover-hint">↑ Hover to see figure</p>
-    <h3>PC-ED: Testing Automated Agents to Assess the Quality of Training Resource Metadata</h3>
-    <p class="project-desc">
-      We developed an automated agent system using LLMs and RAG to evaluate and improve the quality
-      of CCIHE training resource metadata, dynamically updating the database with new Q&amp;A pairs.
-      Integrated into a React dashboard for secure, enhanced user interaction.
-    </p>
-    <div class="project-links">
-      <a href="#">Read Paper →</a>
-      <span style="font-size:14px;color:var(--muted)">SC25 — International Conference for High Performance Computing</span>
-    </div>
-  </div>
-
-  <!-- RCSB -->
-  <div class="project">
-    <div class="project-fig">
-      <div class="fig-hover-img"><img src="" alt="" onerror="this.style.display='none'"/></div>
-    </div>
-    <p class="hover-hint">↑ Hover to see figure</p>
-    <h3>RCSB Protein Data Bank: Python Software Package for Accessing RCSB PDB APIs</h3>
-    <p class="project-desc">
-      A Python wrapper for RCSB PDB's data API enabling streamlined access and integration of
-      3D macromolecular structure data. Built with GraphQL, rustworkx, networkx, and Azure.
-      Published open-source on GitHub and PyPI.
-    </p>
-    <div class="project-links">
-      <a href="#">Read Paper →</a>
-      <a href="#">GitHub →</a>
-      <a href="#">PyPI →</a>
-      <span style="font-size:14px;color:var(--muted)">Journal of Molecular Biology</span>
-    </div>
-  </div>
-
-  <!-- Fraunhofer -->
-  <div class="project">
-    <div class="project-fig">
-      <div class="fig-hover-img"><img src="" alt="" onerror="this.style.display='none'"/></div>
-    </div>
-    <p class="hover-hint">↑ Hover to see figure</p>
-    <h3>Towards Foundation Models for Shock Compression of Solid Reactive Materials</h3>
-    <p class="project-desc">
-      Investigating the application of foundation models to shock compression of solid reactive
-      materials, bridging large-scale machine learning with computational materials science.
-    </p>
-    <div class="project-links">
-      <a href="#">Read Paper →</a>
-      <span style="font-size:14px;color:var(--muted)">2026 International Annual Conference of the Fraunhofer ICT</span>
-    </div>
-  </div>
-
-  <!-- FIA 2026 BoxCar — 3D viewer instead of static image -->
-  <div class="project">
-    <div class="project-fig viewer-fig" id="car-fig">
-      <div class="car-wrap" id="car-wrap">
-        <div class="car-loader" id="car-loader">Loading car…</div>
-      </div>
-      <div class="car-ui">
-        <span class="car-ui-left">FIA 2026 · Ref Car</span>
-        <span class="car-ui-right">drag · scroll</span>
-      </div>
-    </div>
-    <h3>FIA 2026 F1 Reference Car — Procedural Parametric Model</h3>
-    <p class="project-desc">
-      Full procedural reconstruction of the FIA 2026 Formula 1 reference car geometry generated
-      entirely from the technical regulations using a FreeCAD Python macro. Every volume —
-      floor, nose, chassis, sidepods, front and rear wings, halo, wheel drums, diffuser —
-      is built from first principles via CSG booleans and plane trims derived from regulatory dimensions.
-    </p>
-    <div class="project-links">
-      <a href="#">GitHub →</a>
-    </div>
-  </div>
-
-  <!-- VR -->
-  <div class="project">
-    <div class="project-fig">
-      <div class="fig-hover-img"><img src="" alt="" onerror="this.style.display='none'"/></div>
-    </div>
-    <p class="hover-hint">↑ Hover to see figure</p>
-    <h3>VR Interactive Data Exploration</h3>
-    <p class="project-desc">
-      Custom Unity applications for interactive data exploration in VR. Implemented complex
-      data interactions and user interfaces via Unity scripting; created and optimized
-      3D models in Blender and Maya.
-    </p>
-    <div class="project-links">
-      <span style="font-size:14px;color:var(--muted)">Undergraduate Research · Kean University, 2022–2023</span>
-    </div>
-  </div>
-
-</section>
-
-<!-- NEWS -->
-<section id="news">
-  <h2>News</h2>
-  <table class="news">
-    <tbody>
-      <tr><td>2026</td><td>Poster at International Annual Conference of the Fraunhofer ICT.</td></tr>
-      <tr><td>2026</td><td>Paper accepted — <em>Towards Foundation Models for Shock Compression of Solid Reactive Materials</em>, Fraunhofer ICT.</td></tr>
-      <tr><td>Jun 2026 – Aug 2026</td><td>Graduate Teaching Assistant — <em>Machine Learning in Systems and Network Security</em> (Master's), UVA.</td></tr>
-      <tr><td>Jan 2026 – May 2026</td><td>Graduate Teaching Assistant — <em>Introduction to Deep Learning</em> (Undergraduate), UVA.</td></tr>
-      <tr><td>Aug 2025</td><td>Started PhD in Data Science at University of Virginia.</td></tr>
-      <tr><td>Sep 2025 – Dec 2025</td><td>Graduate Teaching Assistant — <em>Computational Probability</em> (Undergraduate), UVA.</td></tr>
-    </tbody>
-    <tbody class="news-extra" id="news-extra">
-      <tr><td>2025</td><td>Paper accepted — <em>PC-ED: Testing Automated Agents to Assess the Quality of Training Resource Metadata</em>, SC25.</td></tr>
-      <tr><td>2025</td><td>Completed M.S. Computational Science and Engineering, Kean University.</td></tr>
-      <tr><td>2024</td><td>Poster at ABRCMS Conference 2024.</td></tr>
-      <tr><td>2024</td><td>Poster at Rutgers RISE REU Symposium 2024.</td></tr>
-      <tr><td>May – Aug 2024</td><td>Software Developer Intern at RCSB Protein Data Bank. Published Python package on PyPI.</td></tr>
-      <tr><td>2024</td><td>Paper published — <em>RCSB Protein Data Bank: Python Software Package for Accessing RCSB PDB APIs</em>, Journal of Molecular Biology.</td></tr>
-      <tr><td>2023</td><td>Awarded Generation Google Scholar and National Cyber Scholarship Scholar.</td></tr>
-      <tr><td>2022 – 2024</td><td>Poster presentations at Research Days, Kean University.</td></tr>
-      <tr><td>2023</td><td>Distinction in Research Award, Kean University.</td></tr>
-    </tbody>
-  </table>
-  <button class="news-more-btn" id="news-btn" onclick="toggleNews()">Next →</button>
-</section>
-
-<!-- EDUCATION -->
-<section id="education">
-  <h2>Education</h2>
-
-  <div class="edu-entry">
-    <h3>University of Virginia</h3>
-    <div class="deg">Doctor of Philosophy in Data Science</div>
-    <div class="dates">August 2025 – May 2030</div>
-  </div>
-
-  <div class="edu-entry">
-    <h3>Kean University</h3>
-    <div class="deg">M.S. Computational Science and Engineering</div>
-    <div class="dates">January 2025 – June 2025</div>
-    <div class="detail">Thesis: Developing Large Language Models to Automate Quality Assurance of Digital Library Metadata · transferred to UVA</div>
-  </div>
-
-  <div class="edu-entry">
-    <h3>Kean University</h3>
-    <div class="deg">B.S. Science and Technology — Applied Mathematics, Computer Science Minor</div>
-    <div class="dates">September 2021 – December 2025</div>
-    <div class="detail">Dean's List 2021–2025 · Vice President, ACM · Treasurer, ACM-W · Secretary, Arab Culture Club</div>
-  </div>
-</section>
-
-<!-- CV -->
-<section id="cv" style="padding-bottom:8px">
-  <h2>CV</h2>
-  <a href="CV.pdf" class="cv-download" target="_blank">↓ Download CV</a>
-</section>
-
-<footer>
-  © 2026 Habiba Morsy · <a href="mailto:crv4jj@virginia.edu">crv4jj@virginia.edu</a>
-</footer>
-
-<!-- THREE.JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script>
-// News toggle
-function toggleNews() {
-  const extra = document.getElementById('news-extra');
-  const btn   = document.getElementById('news-btn');
-  const open  = extra.classList.toggle('show');
-  btn.textContent = open ? '← Back' : 'Next →';
-}
-
-// 3D car — init immediately on load (viewer is always visible)
-(function initCar() {
-  const wrap   = document.getElementById('car-wrap');
-  const loader = document.getElementById('car-loader');
-  const fig    = document.getElementById('car-fig');
-
-  const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x0c0c0c);
-
-  const cam = new THREE.PerspectiveCamera(42, fig.clientWidth / fig.clientHeight, 1, 200000);
-
-  const renderer = new THREE.WebGLRenderer({antialias: true});
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setSize(fig.clientWidth, fig.clientHeight);
-  renderer.outputEncoding = THREE.sRGBEncoding;
-  renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.2;
-  wrap.appendChild(renderer.domElement);
-
-  // Lights
-  scene.add(new THREE.AmbientLight(0xffffff, 0.4));
-  const key = new THREE.DirectionalLight(0xfff8f0, 1.3);
-  key.position.set(5000, 8000, 6000); scene.add(key);
-  const fill = new THREE.DirectionalLight(0xf0f5ff, 0.4);
-  fill.position.set(-4000, 3000, -3000); scene.add(fill);
-  const rim = new THREE.DirectionalLight(0xff2020, 0.18);
-  rim.position.set(0, -800, -8000); scene.add(rim);
-
-  // Orbit (BoxCar: X=-1300→4160, Y=0→1000, Z=-900→900)
-  const T = new THREE.Vector3(1430, 350, 0);
-  let sph = {theta: 0.62, phi: 1.1, r: 9000}, autoRot = true, drag = false, lx = 0, ly = 0;
-
-  function update() {
-    cam.position.set(
-      T.x + sph.r * Math.sin(sph.phi) * Math.sin(sph.theta),
-      T.y + sph.r * Math.cos(sph.phi),
-      T.z + sph.r * Math.sin(sph.phi) * Math.cos(sph.theta)
-    );
-    cam.lookAt(T);
-  }
-  update();
-
-  const cv = renderer.domElement;
-  cv.addEventListener('mousedown', e => { drag=true; lx=e.clientX; ly=e.clientY; autoRot=false; });
-  window.addEventListener('mouseup', () => { drag=false; });
-  window.addEventListener('mousemove', e => {
-    if (!drag) return;
-    sph.theta -= (e.clientX-lx)*0.004;
-    sph.phi = Math.max(0.08, Math.min(Math.PI*.92, sph.phi-(e.clientY-ly)*0.004));
-    lx=e.clientX; ly=e.clientY; update();
-  });
-  cv.addEventListener('wheel', e => {
-    sph.r = Math.max(2000, Math.min(22000, sph.r+e.deltaY*4));
-    update(); e.preventDefault();
-  }, {passive:false});
-  let ptx=0, pty=0;
-  cv.addEventListener('touchstart', e => { if(e.touches.length===1){ptx=e.touches[0].clientX;pty=e.touches[0].clientY;autoRot=false;} });
-  cv.addEventListener('touchmove', e => {
-    if(e.touches.length===1){
-      sph.theta-=(e.touches[0].clientX-ptx)*0.005;
-      sph.phi=Math.max(0.08,Math.min(Math.PI*.92,sph.phi-(e.touches[0].clientY-pty)*0.005));
-      ptx=e.touches[0].clientX;pty=e.touches[0].clientY;update();e.preventDefault();
+    function newsPage(dir) {
+      document.getElementById('news-p' + currentPage).classList.remove('active');
+      currentPage += dir;
+      document.getElementById('news-p' + currentPage).classList.add('active');
+      document.getElementById('news-prev').disabled = currentPage === 1;
+      document.getElementById('news-next').disabled = currentPage === totalPages;
     }
-  },{passive:false});
-  window.addEventListener('resize', () => {
-    cam.aspect = fig.clientWidth/fig.clientHeight;
-    cam.updateProjectionMatrix();
-    renderer.setSize(fig.clientWidth, fig.clientHeight);
-  });
 
-  function animate() {
-    requestAnimationFrame(animate);
-    if (autoRot) { sph.theta+=0.0014; update(); }
-    renderer.render(scene, cam);
-  }
-  animate();
+    // ---------- Model viewer ----------
+    function toggleRotate(btn) {
+      const mv = document.getElementById('aerogen-viewer');
+      if (btn.classList.contains('active')) {
+        mv.removeAttribute('auto-rotate');
+        btn.classList.remove('active');
+      } else {
+        mv.setAttribute('auto-rotate', '');
+        btn.classList.add('active');
+        mv.dispatchEvent(new Event('click'));
+      }
+    }
 
-  // Load model
-  const gs = document.createElement('script');
-  gs.src = 'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js';
-  gs.onload = () => {
-    new THREE.GLTFLoader().load('BoxCar.gltf',
-      gltf => {
-        loader.style.display='none';
-        scene.add(gltf.scene);
-        const box = new THREE.Box3().setFromObject(gltf.scene);
-        T.copy(box.getCenter(new THREE.Vector3()));
-        sph.r = box.getSize(new THREE.Vector3()).length() * 1.05;
-        update();
-      },
-      null,
-      () => tryOBJ()
-    );
-  };
-  gs.onerror = tryOBJ;
-  document.head.appendChild(gs);
+    function resetCamera() {
+      const mv = document.getElementById('aerogen-viewer');
+      mv.cameraOrbit = '45deg 70deg auto';
+      mv.fieldOfView = 'auto';
+    }
+  </script>
 
-  function tryOBJ() {
-    const os = document.createElement('script');
-    os.src = 'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js';
-    os.onload = () => {
-      new THREE.OBJLoader().load('BoxCar.obj',
-        obj => {
-          loader.style.display='none';
-          const pal=[0x1a6e3c,0x4a7bb5,0x8b5e3c,0xc0141a,0xcccccc,0x3a6ea5,0x666,0xaa8833];
-          let i=0;
-          obj.traverse(c=>{if(c.isMesh)c.material=new THREE.MeshStandardMaterial({color:pal[i++%pal.length],roughness:.65,metalness:.2});});
-          scene.add(obj);
-          const box=new THREE.Box3().setFromObject(obj);
-          T.copy(box.getCenter(new THREE.Vector3()));
-          sph.r=box.getSize(new THREE.Vector3()).length()*1.05;
-          update();
-        },
-        null,
-        ()=>{loader.textContent='Add BoxCar.gltf + BoxCar.bin to repo root';}
-      );
-    };
-    document.head.appendChild(os);
-  }
-})();
-</script>
 </body>
 </html>
