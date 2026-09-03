@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -276,50 +275,96 @@
       margin-top: 14px;
     }
 
-    /* ---------- AeroGen Carousel ---------- */
+    /* ---------- Shared Carousel ---------- */
 
-    .aerogen-card .project-figure {
-      max-height: 0;
-      overflow: hidden;
-      opacity: 0;
-      transition:
-        max-height 0.45s ease,
-        opacity 0.35s ease,
-        margin-bottom 0.35s ease;
-    }
-
-    .aerogen-card:hover .project-figure {
-      max-height: 520px;
-      opacity: 1;
-      margin-bottom: 28px;
-    }
-
-    .aerogen-carousel {
+    .project-carousel {
       position: relative;
       width: 100%;
       overflow: hidden;
       border-radius: 8px;
-      background: #f8f1f4;
+      background: #ffffff;
     }
 
-    .aero-slide {
+    .carousel-slide {
       display: none;
       width: 100%;
       height: 420px;
     }
 
-    .aero-slide.active {
+    .carousel-slide.active {
       display: block;
     }
 
-    .aero-slide img,
-    .aero-slide video {
+    .carousel-slide img,
+    .carousel-slide video {
       width: 100%;
       height: 420px;
       object-fit: contain;
       display: block;
+      background: #ffffff;
       border-radius: 8px;
-      background: #f8f1f4;
+    }
+
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 30;
+      width: 42px;
+      height: 42px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.85);
+      color: #2b2b2b;
+      font-size: 1.35rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+      transition: 0.2s ease;
+    }
+
+    .carousel-arrow:hover {
+      background: #ffffff;
+      transform: translateY(-50%) scale(1.06);
+    }
+
+    .carousel-arrow.left {
+      left: 14px;
+    }
+
+    .carousel-arrow.right {
+      right: 14px;
+    }
+
+    .carousel-dots {
+      position: absolute;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 30;
+    }
+
+    .carousel-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(43, 43, 43, 0.3);
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .carousel-dot.active {
+      background: #2b2b2b;
+    }
+
+    /* ---------- AeroGen ---------- */
+
+    .aerogen-card:hover .project-figure {
+      max-height: 520px;
     }
 
     .model-viewer-wrap {
@@ -379,63 +424,7 @@
       border-color: #2b2b2b;
     }
 
-    .carousel-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 30;
-      width: 42px;
-      height: 42px;
-      border: none;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.82);
-      color: #2b2b2b;
-      font-size: 1.35rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
-      transition: 0.2s ease;
-    }
-
-    .carousel-arrow:hover {
-      background: #ffffff;
-      transform: translateY(-50%) scale(1.06);
-    }
-
-    .carousel-arrow.left {
-      left: 14px;
-    }
-
-    .carousel-arrow.right {
-      right: 14px;
-    }
-
-    .carousel-dots {
-      position: absolute;
-      bottom: 14px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 8px;
-      z-index: 30;
-    }
-
-    .carousel-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: rgba(43, 43, 43, 0.3);
-      cursor: pointer;
-      transition: 0.2s ease;
-    }
-
-    .carousel-dot.active {
-      background: #2b2b2b;
-    }
-
-    /* ---------- Teaching Section ---------- */
+    /* ---------- Teaching ---------- */
 
     #teaching .timeline {
       max-width: 850px;
@@ -510,27 +499,10 @@
       border-radius: 999px;
       padding: 8px 22px;
       font-size: 0.82rem;
-      letter-spacing: 0.5px;
       background: transparent;
       color: #2b2b2b;
       cursor: pointer;
-      transition: 0.2s ease;
       font-family: inherit;
-    }
-
-    .news-pagination button:hover {
-      background: #2b2b2b;
-      color: #ffffff;
-    }
-
-    .news-pagination button:disabled {
-      opacity: 0.25;
-      cursor: default;
-    }
-
-    .news-pagination button:disabled:hover {
-      background: transparent;
-      color: #2b2b2b;
     }
 
     /* ---------- Education ---------- */
@@ -589,8 +561,6 @@
       text-decoration: underline;
     }
 
-    /* ---------- Mobile ---------- */
-
     @media (max-width: 780px) {
       .hero h1 {
         font-size: 3.6rem;
@@ -599,7 +569,6 @@
       .about-grid {
         grid-template-columns: 1fr;
         gap: 36px;
-        text-align: left;
       }
 
       .profile-photo {
@@ -617,17 +586,11 @@
         gap: 6px;
       }
 
-      .aero-slide,
-      .aero-slide img,
-      .aero-slide video,
+      .carousel-slide,
+      .carousel-slide img,
+      .carousel-slide video,
       .model-viewer-wrap {
         height: 320px;
-      }
-
-      .carousel-arrow {
-        width: 36px;
-        height: 36px;
-        font-size: 1.1rem;
       }
     }
   </style>
@@ -637,6 +600,7 @@
 
   <!-- Landing Page -->
   <header class="hero">
+
     <h1>HABIBA MORSY</h1>
 
     <nav class="nav-buttons">
@@ -649,32 +613,24 @@
 
     <div class="social-icons">
 
-      <a
-        href="https://www.linkedin.com/in/habiba-morsy/"
-        target="_blank"
-        aria-label="LinkedIn">
+      <a href="https://www.linkedin.com/in/habiba-morsy/" target="_blank">
         <i class="fa-brands fa-linkedin-in"></i>
       </a>
 
-      <a
-        href="https://github.com/habiba-m"
-        target="_blank"
-        aria-label="GitHub">
+      <a href="https://github.com/habiba-m" target="_blank">
         <i class="fa-brands fa-github"></i>
       </a>
 
-      <a
-        href="assets/cv.pdf"
-        target="_blank"
-        aria-label="CV">
+      <a href="assets/cv.pdf" target="_blank">
         <i class="fa-solid fa-file-lines"></i>
       </a>
 
     </div>
 
-    <a href="#about" class="down-arrow" aria-label="Scroll down">
+    <a href="#about" class="down-arrow">
       <i class="fa-solid fa-chevron-down"></i>
     </a>
+
   </header>
 
   <!-- About -->
@@ -693,33 +649,34 @@
       <div class="about-text">
 
         <p>
-          I'm a Ph.D. student in Data Science at the University of Virginia, advised by
-          <a
-            href="https://stephenbaek.github.io/lab/"
-            target="_blank">
+          I'm a Ph.D. student in Data Science at the University of Virginia,
+          advised by
+          <a href="https://stephenbaek.github.io/lab/" target="_blank">
             Professor Stephen Baek
           </a>.
-          My research focuses on scientific machine learning, physics-aware deep learning, and
-          data-driven design for physical systems. I am currently working on autonomous aerodynamic
-          design pipelines for Formula 1 car geometries, combining parametric modeling,
-          simulation-ready datasets, and deep learning for design exploration.
+          My research focuses on scientific machine learning, physics-aware deep learning,
+          and data-driven design for physical systems. I am currently working on autonomous
+          aerodynamic design pipelines for Formula 1 car geometries, combining parametric
+          modeling, simulation-ready datasets, and deep learning for design exploration.
         </p>
 
         <p>
-          Before joining UVA, I earned my B.S. in Computational Science and Engineering from
-          Kean University, with minors in Computer Science and Applied Mathematics. I have also
-          worked on research projects involving physics-aware deep learning for energetic materials,
-          large language models, and open source software development.
+          Before joining UVA, I earned my B.S. in Computational Science and Engineering
+          from Kean University, with minors in Computer Science and Applied Mathematics.
+          I have also worked on research projects involving physics-aware deep learning
+          for energetic materials, large language models, and open source software development.
         </p>
 
         <div class="tags">
           <span class="tag">Scientific Machine Learning</span>
           <span class="tag">Physics-Aware Deep Learning</span>
           <span class="tag">Aerodynamic Design</span>
+          <span class="tag">Energetic Materials</span>
         </div>
 
       </div>
     </div>
+
   </section>
 
   <!-- Projects -->
@@ -732,20 +689,16 @@
       <!-- AeroGen -->
       <div class="project-card aerogen-card">
 
-        <div class="project-figure model-figure">
+        <div class="project-figure">
 
-          <div class="aerogen-carousel">
+          <div class="project-carousel" id="aerogen-carousel">
 
-            <!-- Left Arrow -->
-            <button
-              class="carousel-arrow left"
-              onclick="changeAeroSlide(-1)"
-              aria-label="Previous AeroGen slide">
+            <button class="carousel-arrow left"
+              onclick="changeCarousel('aerogen', -1)">
               &#10094;
             </button>
 
-            <!-- Slide 1: FIA Box Car -->
-            <div class="aero-slide active">
+            <div class="carousel-slide active aerogen-slide">
 
               <div class="model-viewer-wrap">
 
@@ -756,20 +709,13 @@
                 <model-viewer
                   id="aerogen-viewer"
                   src="assets/BoxCar.gltf"
-                  alt="Rotating FIA 2026 reference box car model"
                   camera-controls
                   auto-rotate
                   rotation-per-second="28deg"
                   camera-orbit="45deg 70deg auto"
                   exposure="1"
                   shadow-intensity="1"
-                  style="
-                    width: 100%;
-                    height: 100%;
-                    background: #f8f1f4;
-                    border-radius: 8px;
-                    display: block;
-                  ">
+                  style="width:100%;height:100%;background:#f8f1f4;">
                 </model-viewer>
 
                 <div class="mv-controls">
@@ -788,77 +734,77 @@
                 </div>
 
               </div>
+
             </div>
 
-            <!-- Slide 2: Sidepod Geometry -->
-            <div class="aero-slide">
+            <div class="carousel-slide aerogen-slide">
 
               <img
                 src="img/sidepods.gif"
-                alt="Parametric Formula 1 sidepod geometry variations"
+                alt="Parametric Formula 1 sidepod geometries"
               />
 
             </div>
 
-            <!-- Slide 3: CFD -->
-            <div class="aero-slide">
+            <div class="carousel-slide aerogen-slide">
 
-              <video
-                controls
-                muted
-                loop
-                playsinline>
+              <video controls muted loop playsinline>
 
                 <source
                   src="assets/5p25M_video.mp4"
                   type="video/mp4"
                 />
 
-                Your browser does not support HTML5 video.
-
               </video>
 
             </div>
 
-            <!-- Right Arrow -->
-            <button
-              class="carousel-arrow right"
-              onclick="changeAeroSlide(1)"
-              aria-label="Next AeroGen slide">
+            <button class="carousel-arrow right"
+              onclick="changeCarousel('aerogen', 1)">
               &#10095;
             </button>
 
-            <!-- Dots -->
             <div class="carousel-dots">
 
-              <span
-                class="carousel-dot active"
-                onclick="setAeroSlide(0)">
+              <span class="carousel-dot active aerogen-dot"
+                onclick="setCarousel('aerogen', 0)">
               </span>
 
-              <span
-                class="carousel-dot"
-                onclick="setAeroSlide(1)">
+              <span class="carousel-dot aerogen-dot"
+                onclick="setCarousel('aerogen', 1)">
               </span>
 
-              <span
-                class="carousel-dot"
-                onclick="setAeroSlide(2)">
+              <span class="carousel-dot aerogen-dot"
+                onclick="setCarousel('aerogen', 2)">
               </span>
 
             </div>
 
           </div>
+
         </div>
 
         <h3>AeroGen</h3>
 
         <p>
-          AeroGen is my dissertation research project building an autonomous aerodynamic design pipeline for Formula 1 car geometries under the FIA 2026 regulations. The first stage, now completed, is a procedural reconstruction of the FIA 2026 reference box car: a full regulation-compliant geometry encoding more than 35 reference volumes from the technical regulations using CSG boolean operations and plane trims. This envelope defines the legal boundary that every generated design must satisfy. The next stage constructs a parametric F1 car inside this envelope, controlled by a design parameter dictionary. Sampling the parameter space programmatically will generate a large dataset of regulation-compliant geometry variations, labeled with aerodynamic performance data from CFD simulation. This dataset will then be used to train surrogate models that can rapidly predict aerodynamic performance from geometry, reducing the need to run computationally expensive CFD simulations at every design point and enabling faster exploration of the aerodynamic design space.
+          AeroGen is my dissertation research project building an autonomous aerodynamic
+          design pipeline for Formula 1 car geometries under the FIA 2026 regulations.
+          The first stage, now completed, is a procedural reconstruction of the FIA 2026
+          reference box car: a full regulation-compliant geometry encoding more than 35
+          reference volumes from the technical regulations using CSG boolean operations
+          and plane trims. This envelope defines the legal boundary that every generated
+          design must satisfy.
         </p>
 
         <p>
-          The next stage constructs a parametric F1 car inside this envelope, controlled by a design parameter dictionary. Sampling the parameter space programmatically will generate a large dataset of regulation-compliant geometry variations, labeled with aerodynamic performance data from CFD simulation. This dataset will then be used to train surrogate models that can rapidly predict aerodynamic performance from geometry, reducing the need to run computationally expensive CFD simulations at every design point and enabling faster exploration of the aerodynamic design space.
+          The next stage constructs a parametric F1 car inside this envelope, controlled
+          by a design parameter dictionary. Sampling the parameter space programmatically
+          will generate a large dataset of regulation-compliant geometry variations,
+          labeled with aerodynamic performance data from CFD simulation. This dataset
+          will then be used to train surrogate models that can rapidly predict aerodynamic
+          performance from geometry, reducing the need to run computationally expensive
+          CFD simulations at every design point and enabling faster exploration of the
+          aerodynamic design space.
         </p>
 
         <div class="hover-note">
@@ -867,24 +813,123 @@
 
       </div>
 
+      <!-- Statistical Shape Model -->
+      <div class="project-card">
+
+        <div class="project-figure">
+
+          <div class="project-carousel" id="ssm-carousel">
+
+            <button
+              class="carousel-arrow left"
+              onclick="changeCarousel('ssm', -1)">
+              &#10094;
+            </button>
+
+            <!-- SSM Pipeline -->
+            <div class="carousel-slide active ssm-slide">
+
+              <img
+                src="img/ssm-pipeline.png"
+                alt="Statistical Shape Model pipeline"
+              />
+
+            </div>
+
+            <!-- Real vs Generated -->
+            <div class="carousel-slide ssm-slide">
+
+              <img
+                src="img/ssm.png"
+                alt="Real versus SSM generated pore geometries"
+              />
+
+            </div>
+
+            <!-- Optimization Loop -->
+            <div class="carousel-slide ssm-slide">
+
+              <img
+                src="img/loop.png"
+                alt="Pore generation and hotspot prediction optimization loop"
+              />
+
+            </div>
+
+            <button
+              class="carousel-arrow right"
+              onclick="changeCarousel('ssm', 1)">
+              &#10095;
+            </button>
+
+            <div class="carousel-dots">
+
+              <span
+                class="carousel-dot active ssm-dot"
+                onclick="setCarousel('ssm', 0)">
+              </span>
+
+              <span
+                class="carousel-dot ssm-dot"
+                onclick="setCarousel('ssm', 1)">
+              </span>
+
+              <span
+                class="carousel-dot ssm-dot"
+                onclick="setCarousel('ssm', 2)">
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <h3>
+          Beyond Idealized Voids: Linking Pore Morphology to Hotspot Sensitivity
+        </h3>
+
+        <p>
+          This project investigates how realistic pore morphology influences
+          shock-induced hotspot formation in reactive materials. We construct a
+          Statistical Shape Model from 134 pore geometries, representing shape
+          variation through 20 interpretable principal components that capture
+          97.5% of the morphological variance. The resulting latent space connects
+          directly to geometric features including elongation, curvature,
+          asymmetry, and orientation.
+        </p>
+
+        <p>
+          Novel pore geometries sampled from this shape space are evaluated using LatentPARC, a physics-aware neural surrogate that predicts the evolving temperature field during pore collapse. By linking interpretable morphology parameters to hotspot quantities such as hotspot area, temperature, and their rates of change, the project aims to identify which specific geometric features most strongly control material sensitivity and provide a more systematic alternative to idealized pore shapes or uninterpretable generative models.
+        </p>
+
+        <div class="hover-note">
+          ↑ Hover to explore the shape model and prediction pipeline
+        </div>
+
+      </div>
+
       <!-- rcsb-api -->
       <div class="project-card">
 
         <div class="project-figure">
+
           <img
             src="img/rcsbworkflow.png"
             alt="RCSB API workflow figure"
           />
+
         </div>
 
         <h3>rcsb-api</h3>
 
         <p>
-          A Python package for programmatic access to the RCSB Protein Data Bank — home to over
-          230,000 3D structures of proteins, nucleic acids, and macromolecular machines. The package
-          wraps the RCSB Search and Data APIs in a Pythonic interface, allowing researchers to query,
-          retrieve, and integrate structural biology data without needing to understand the underlying
-          GraphQL schema. Published in
+          A Python package for programmatic access to the RCSB Protein Data Bank —
+          home to over 230,000 3D structures of proteins, nucleic acids, and
+          macromolecular machines. The package wraps the RCSB Search and Data APIs
+          in a Pythonic interface, allowing researchers to query, retrieve, and
+          integrate structural biology data without needing to understand the
+          underlying GraphQL schema. Published in
           <a
             class="paper-link"
             href="https://www.sciencedirect.com/science/article/pii/S0022283625000361"
@@ -894,10 +939,23 @@
         </p>
 
         <div class="project-links">
-          <a href="assets/rcsb-api.pdf" target="_blank">Read Paper →</a>
-          <a href="assets/Habiba-5MP.pdf" target="_blank">Presentation →</a>
-          <a href="assets/Habiba-RISE-Poster.pdf" target="_blank">Poster →</a>
-          <a href="https://pypi.org/project/rcsb-api/" target="_blank">PyPI →</a>
+
+          <a href="assets/rcsb-api.pdf" target="_blank">
+            Read Paper →
+          </a>
+
+          <a href="assets/Habiba-5MP.pdf" target="_blank">
+            Presentation →
+          </a>
+
+          <a href="assets/Habiba-RISE-Poster.pdf" target="_blank">
+            Poster →
+          </a>
+
+          <a href="https://pypi.org/project/rcsb-api/" target="_blank">
+            PyPI →
+          </a>
+
         </div>
 
         <div class="hover-note">
@@ -910,30 +968,42 @@
       <div class="project-card">
 
         <div class="project-figure">
+
           <img
             src="img/hpc.png"
             alt="HPC-ED metadata quality assurance workflow figure"
           />
+
         </div>
 
         <h3>HPC-ED</h3>
 
         <p>
-          HPC-ED is a federated catalog that aggregates training materials — tutorials,
-          workshops, and course modules — from partner institutions across the HPC and
-          cyberinfrastructure community. As part of the project, I built a proof-of-concept
-          automated quality assurance system that uses a two-stage LLM pipeline to crawl
-          catalog entries, including YouTube transcript extraction, summarize content, and
-          score metadata accuracy against the actual resource. The system was evaluated across
-          GPT-3.5 Turbo, GPT-4o Mini, GPT-4.1 Nano, and GPT-4.1 Mini. Published and presented
-          at BPHTE '25, the SC Workshop on Best Practices for HPC Training and Education.
+          HPC-ED is a federated catalog that aggregates training materials —
+          tutorials, workshops, and course modules — from partner institutions
+          across the HPC and cyberinfrastructure community. As part of the project,
+          I built a proof-of-concept automated quality assurance system that uses
+          a two-stage LLM pipeline to crawl catalog entries, including YouTube
+          transcript extraction, summarize content, and score metadata accuracy
+          against the actual resource.
         </p>
 
         <div class="project-links">
-          <a href="assets/BPHTE25_FULL.pdf" target="_blank">Read Paper →</a>
-          <a href="assets/BPHTE25_Slides.pdf" target="_blank">Slides →</a>
-          <a href="https://github.com/habiba-m/hpc-metadata-evaluator" target="_blank">Code →</a>
-          <a href="https://hpc-ed.github.io/" target="_blank">HPC-ED →</a>
+
+          <a href="assets/BPHTE25_FULL.pdf" target="_blank">
+            Read Paper →
+          </a>
+
+          <a href="assets/BPHTE25_Slides.pdf" target="_blank">
+            Slides →
+          </a>
+
+          <a
+            href="https://github.com/habiba-m/hpc-metadata-evaluator"
+            target="_blank">
+            Code →
+          </a>
+
         </div>
 
         <div class="hover-note">
@@ -945,29 +1015,34 @@
       <!-- OmniPARC -->
       <div class="project-card">
 
-        <h3>OmniPARC</h3>
-
         <div class="project-figure">
+
           <img
             src="img/parcv2.png"
             alt="PARCv2 architecture figure"
           />
+
         </div>
 
+        <h3>OmniPARC</h3>
+
         <p>
-          OmniPARC is a physics-aware neural surrogate model for shock-compressed solid
-          reactive materials. The project works toward foundation models for energetic
-          materials by learning shared dynamics across different chemical species and
-          microstructural geometries, enabling prediction and analysis of
-          chemistry–structure–performance relationships.
+          OmniPARC is a physics-aware neural surrogate model for
+          shock-compressed solid reactive materials. The project works toward
+          foundation models for energetic materials by learning shared dynamics
+          across different chemical species and microstructural geometries,
+          enabling prediction and analysis of chemistry–structure–performance
+          relationships.
         </p>
 
         <div class="project-links">
+
           <a
             href="assets/2026_ICT_Foundation_submission.pdf"
             target="_blank">
             Abstract →
           </a>
+
         </div>
 
         <div class="hover-note">
@@ -980,35 +1055,34 @@
       <div class="project-card">
 
         <div class="project-figure">
+
           <img
             src="img/llm-dashboard.png"
             alt="Screenshot of the LLM dashboard interface"
           />
+
         </div>
 
         <h3>LLM Dashboard for Carnegie Classification Queries</h3>
 
         <p>
-          Built an LLM and retrieval-augmented generation application for answering queries
-          related to the Carnegie Classification of Institutions of Higher Education (CCIHE)
-          through a React dashboard. The system retrieves relevant information, generates
-          responses, and dynamically updates a database with new question–answer pairs,
-          improving access to higher education classification data while supporting secure
-          and user-friendly interaction.
+          Built an LLM and retrieval-augmented generation application for
+          answering queries related to the Carnegie Classification of
+          Institutions of Higher Education through a React dashboard.
         </p>
 
         <div class="project-links">
+
           <a
             href="https://github.com/blackmoc/CCHIE_Application"
             target="_blank">
             Code →
           </a>
 
-          <a
-            href="assets/CCIHE_Slides.pdf"
-            target="_blank">
+          <a href="assets/CCIHE_Slides.pdf" target="_blank">
             Slides →
           </a>
+
         </div>
 
         <div class="hover-note">
@@ -1018,6 +1092,7 @@
       </div>
 
     </div>
+
   </section>
 
   <!-- News -->
@@ -1027,7 +1102,6 @@
 
     <div class="news-wrap">
 
-      <!-- Page 1 -->
       <div class="news-page active" id="news-p1">
 
         <div class="news-row">
@@ -1044,22 +1118,14 @@
           <div>
             Presented
             <em>HPC-ED: Testing Automated Agents to Assess the Quality of Training Resource Metadata</em>
-            at BPHTE '25, the SC Workshop on Best Practices for HPC Training and Education.
-            <a
-              class="paper-link"
-              href="assets/BPHTE25_Slides.pdf"
-              target="_blank">
-              Slides →
-            </a>
+            at BPHTE '25.
           </div>
         </div>
 
         <div class="news-row">
           <div class="news-date">August 2025</div>
           <div>
-            Published
-            <em>rcsb-api: Python Toolkit for Streamlining Access to RCSB Protein Data Bank APIs</em>
-            in
+            Published <em>rcsb-api</em> in
             <a
               class="paper-link"
               href="https://www.sciencedirect.com/science/article/pii/S0022283625000361"
@@ -1079,49 +1145,31 @@
         <div class="news-row">
           <div class="news-date">May 2025</div>
           <div>
-            Completed my master's thesis at Kean University on using large language models
-            to automate quality assurance of digital library metadata.
-            <a
-              class="paper-link"
-              href="assets/BPHTE25_FULL.pdf"
-              target="_blank">
-              Paper →
-            </a>
+            Completed my master's thesis at Kean University.
           </div>
         </div>
 
       </div>
 
-      <!-- Page 2 -->
       <div class="news-page" id="news-p2">
 
         <div class="news-row">
           <div class="news-date">January 2025</div>
-          <div>
-            Started Master's Degree in Data Science at Kean University.
-          </div>
+          <div>Started Master's Degree in Data Science at Kean University.</div>
         </div>
 
         <div class="news-row">
           <div class="news-date">December 2024</div>
           <div>
-            Graduated from Kean University with a B.S. in Computational Science and Engineering.
-            Received the Distinction in Research Award.
+            Graduated from Kean University with a B.S. in Computational Science
+            and Engineering.
           </div>
         </div>
 
         <div class="news-row">
           <div class="news-date">November 2024</div>
           <div>
-            Presented
-            <em>rcsb-api: Streamlining Programmatic Access to Structural Biology Data with Python</em>
-            at the ABRCMS Conference.
-            <a
-              class="paper-link"
-              href="assets/Habiba-RISE-Poster.pdf"
-              target="_blank">
-              Poster →
-            </a>
+            Presented <em>rcsb-api</em> at the ABRCMS Conference.
           </div>
         </div>
 
@@ -1129,19 +1177,6 @@
           <div class="news-date">August 2024</div>
           <div>
             Presented <em>rcsb-api</em> at the Rutgers RISE REU Symposium.
-            <a
-              class="paper-link"
-              href="assets/Habiba-RISE-Poster.pdf"
-              target="_blank">
-              Poster →
-            </a>
-
-            <a
-              class="paper-link"
-              href="assets/Habiba-5MP.pdf"
-              target="_blank">
-              Slides →
-            </a>
           </div>
         </div>
 
@@ -1172,6 +1207,7 @@
       </div>
 
     </div>
+
   </section>
 
   <!-- Teaching -->
@@ -1184,7 +1220,6 @@
       <div class="edu-item">
 
         <h3>Graduate Teaching Assistant</h3>
-
         <p>University of Virginia</p>
 
         <p>
@@ -1202,7 +1237,6 @@
       <div class="edu-item">
 
         <h3>Graduate Teaching Assistant</h3>
-
         <p>University of Virginia</p>
 
         <p>
@@ -1220,7 +1254,6 @@
       <div class="edu-item">
 
         <h3>Graduate Teaching Assistant</h3>
-
         <p>University of Virginia</p>
 
         <p>
@@ -1238,7 +1271,6 @@
       <div class="edu-item">
 
         <h3>Graduate Teaching Assistant</h3>
-
         <p>University of Virginia</p>
 
         <p>
@@ -1256,12 +1288,11 @@
       <div class="edu-item">
 
         <h3>Student Assistant</h3>
-
         <p>Kean University</p>
 
         <p>
-          Tutored students in Python and Java programming, debugging, data structures,
-          algorithms, and object-oriented programming.
+          Tutored students in Python and Java programming, debugging,
+          data structures, algorithms, and object-oriented programming.
         </p>
 
         <div class="edu-date">
@@ -1271,6 +1302,7 @@
       </div>
 
     </div>
+
   </section>
 
   <!-- Education -->
@@ -1283,7 +1315,6 @@
       <div class="edu-item">
 
         <h3>University of Virginia</h3>
-
         <p>Ph.D. in Data Science</p>
 
         <div class="edu-date">
@@ -1311,21 +1342,19 @@
       </div>
 
     </div>
+
   </section>
 
   <footer>
-
     © 2026 Habiba Morsy ·
-
     <a href="mailto:crv4jj@virginia.edu">
       crv4jj@virginia.edu
     </a>
-
   </footer>
 
   <script>
 
-    // ---------- News Pagination ----------
+    /* ---------- News ---------- */
 
     const totalPages = 2;
     let currentPage = 1;
@@ -1350,22 +1379,21 @@
     }
 
 
-    // ---------- Model Viewer ----------
+    /* ---------- Model Viewer ---------- */
 
     function toggleRotate(btn) {
 
-      const mv = document.getElementById("aerogen-viewer");
+      const mv =
+        document.getElementById("aerogen-viewer");
 
       if (btn.classList.contains("active")) {
 
         mv.removeAttribute("auto-rotate");
-
         btn.classList.remove("active");
 
       } else {
 
         mv.setAttribute("auto-rotate", "");
-
         btn.classList.add("active");
       }
     }
@@ -1373,39 +1401,44 @@
 
     function resetCamera() {
 
-      const mv = document.getElementById("aerogen-viewer");
+      const mv =
+        document.getElementById("aerogen-viewer");
 
-      mv.cameraOrbit = "45deg 70deg auto";
-      mv.fieldOfView = "auto";
+      mv.cameraOrbit =
+        "45deg 70deg auto";
+
+      mv.fieldOfView =
+        "auto";
 
       mv.jumpCameraToGoal();
     }
 
 
-    // ---------- AeroGen Carousel ----------
+    /* ---------- Generic Carousel ---------- */
 
-    let aeroSlide = 0;
+    const carouselState = {
+      aerogen: 0,
+      ssm: 0
+    };
 
-    function showAeroSlide(index) {
+
+    function showCarousel(name, index) {
 
       const slides =
-        document.querySelectorAll(".aero-slide");
+        document.querySelectorAll("." + name + "-slide");
 
       const dots =
-        document.querySelectorAll(".carousel-dot");
+        document.querySelectorAll("." + name + "-dot");
 
       if (index >= slides.length) {
-
-        aeroSlide = 0;
-
-      } else if (index < 0) {
-
-        aeroSlide = slides.length - 1;
-
-      } else {
-
-        aeroSlide = index;
+        index = 0;
       }
+
+      if (index < 0) {
+        index = slides.length - 1;
+      }
+
+      carouselState[name] = index;
 
       slides.forEach(slide => {
         slide.classList.remove("active");
@@ -1415,32 +1448,44 @@
         dot.classList.remove("active");
       });
 
-      slides[aeroSlide].classList.add("active");
+      slides[index].classList.add("active");
 
-      dots[aeroSlide].classList.add("active");
+      dots[index].classList.add("active");
 
 
-      // Pause CFD video when leaving its slide
-      const videos =
-        document.querySelectorAll(".aero-slide video");
+      /* Pause videos when leaving slide */
 
-      videos.forEach(video => {
-        video.pause();
+      slides.forEach(slide => {
+
+        const video =
+          slide.querySelector("video");
+
+        if (video && !slide.classList.contains("active")) {
+          video.pause();
+        }
+
       });
+
     }
 
 
-    function changeAeroSlide(direction) {
+    function changeCarousel(name, direction) {
 
-      showAeroSlide(
-        aeroSlide + direction
+      showCarousel(
+        name,
+        carouselState[name] + direction
       );
+
     }
 
 
-    function setAeroSlide(index) {
+    function setCarousel(name, index) {
 
-      showAeroSlide(index);
+      showCarousel(
+        name,
+        index
+      );
+
     }
 
   </script>
